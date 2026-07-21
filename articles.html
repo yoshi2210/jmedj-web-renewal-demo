@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web医事新報(記事一覧) | メディカルパートナー(刷新モック)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="audit-banner">
+  刷新モック — 記事一覧。現行サイトは記事のナビ上の絞り込みが「新着/特集/連載」の3種類のみ(<a href="https://github.com/yoshi2210/jmedj-web-renewal-demo/blob/master/docs/01_current_site_audit.md">01章課題6</a>)。ここでは診療科・連載区分での絞り込みを追加しています。
+</div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="index.html">メディカルパートナー<small>日本医事新報社(刷新モック)</small></a>
+    <div style="flex:1"></div>
+    <div class="header-actions">
+      <button class="icon-btn">カート</button>
+      <a class="icon-btn" href="account.html">ログイン</a>
+      <button class="icon-btn primary">会員登録</button>
+    </div>
+  </div>
+  <div class="wrap search-row">
+    <form class="search-form" onsubmit="location.href='search-results.html?q='+encodeURIComponent(this.q.value); return false;">
+      <input class="search-input" name="q" type="search" placeholder="書籍・記事・動画・求人/物件をキーワードで検索">
+      <button class="search-submit" type="submit">検索</button>
+    </form>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; Web医事新報</p>
+
+  <div class="listing-layout">
+    <aside class="facet-panel" aria-label="絞り込み">
+      <div class="facet-group">
+        <h4>連載区分</h4>
+        <div id="seriesFacets"></div>
+      </div>
+      <div class="facet-group">
+        <h4>診療科</h4>
+        <div id="categoryFacets"></div>
+      </div>
+      <button class="facet-reset" id="resetFacets">絞り込みをクリア</button>
+    </aside>
+
+    <div>
+      <div class="listing-toolbar">
+        <span id="listingCount">読み込み中…</span>
+      </div>
+      <div class="card-grid" id="listingGrid"></div>
+      <div class="empty-state" id="listingEmpty" style="display:none; margin-top:16px;">
+        <h2>条件に一致する記事が見つかりませんでした</h2>
+        <p>絞り込み条件を減らすか、「絞り込みをクリア」をお試しください。</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    (刷新モック) 日本医事新報社 — <a href="index.html" style="color:#e3e8f5;">トップに戻る</a>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/listing-articles.js"></script>
+</body>
+</html>

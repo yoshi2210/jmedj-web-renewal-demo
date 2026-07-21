@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">記事詳細 | メディカルパートナー(刷新モック)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="audit-banner">
+  刷新モック — 記事詳細ページ。現行サイトは個別記事URLが <code>/blogs/product/product_28873</code> のような無意味なID。ここでは診療科カテゴリを軸にしたパンくず・関連記事導線を示しています。
+</div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="index.html">メディカルパートナー<small>日本医事新報社(刷新モック)</small></a>
+    <div style="flex:1"></div>
+    <div class="header-actions">
+      <button class="icon-btn">カート</button>
+      <a class="icon-btn" href="account.html">ログイン</a>
+      <button class="icon-btn primary">会員登録</button>
+    </div>
+  </div>
+  <div class="wrap search-row">
+    <form class="search-form" onsubmit="location.href='search-results.html?q='+encodeURIComponent(this.q.value); return false;">
+      <input class="search-input" name="q" type="search" placeholder="書籍・記事・動画・求人/物件をキーワードで検索">
+      <button class="search-submit" type="submit">検索</button>
+    </form>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="breadcrumb" id="breadcrumb"><a href="index.html">TOP</a> &gt; <a href="index.html#articles">Web医事新報</a></p>
+
+  <article style="max-width:720px; padding: var(--space-4) 0;">
+    <span class="badge" id="articleBadge">記事</span>
+    <h1 id="articleTitle" style="font-size:22px; line-height:1.6; margin: var(--space-2) 0;"></h1>
+    <div class="detail-meta" id="articleMeta"></div>
+    <p class="detail-desc" id="articleDesc"></p>
+  </article>
+
+  <section>
+    <h2 class="related-heading" id="relatedHeading">同じ診療科の記事</h2>
+    <div class="card-grid" id="relatedGrid"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    (刷新モック) 日本医事新報社 — <a href="index.html" style="color:#e3e8f5;">トップに戻る</a>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/article.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ログイン・マイページ | メディカルパートナー(刷新モック)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="audit-banner">
+  刷新モック — アカウント導線。現行サイトはログイン後の移動先が <code>jmedj.myshopify.com</code> に切り替わることがあり(01章課題4)、ドメインが一貫しません。ここでは <code>/account</code> 配下に購入履歴・電子コンテンツ閲覧・応募履歴を統合しています(02章)。
+</div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="index.html">メディカルパートナー<small>日本医事新報社(刷新モック)</small></a>
+    <div style="flex:1"></div>
+    <div class="header-actions">
+      <button class="icon-btn">カート</button>
+      <button class="icon-btn primary">会員登録</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; ログイン・マイページ</p>
+
+  <div class="demo-toolbar" style="margin-top:16px;">
+    <strong>デモ操作:</strong> 状態を切り替えて確認
+    <button type="button" data-state="guest" class="active" aria-pressed="true">未ログイン</button>
+    <button type="button" data-state="member" aria-pressed="false">ログイン済み(マイページ)</button>
+  </div>
+
+  <section id="guestView">
+    <div class="account-layout">
+      <div class="account-panel">
+        <h2>ログイン</h2>
+        <div class="form-field"><label for="email">メールアドレス</label><input id="email" type="email" placeholder="you@example.com"></div>
+        <div class="form-field"><label for="pass">パスワード</label><input id="pass" type="password" placeholder="••••••••"></div>
+        <button class="btn-primary" style="width:100%;">ログイン</button>
+        <p class="form-hint">紙・電子の購入履歴、応募履歴はすべてこの1つのアカウントに統合されます。</p>
+      </div>
+      <div class="account-panel">
+        <h2>会員登録</h2>
+        <div class="form-field"><label for="reg-name">氏名</label><input id="reg-name" type="text" placeholder="医事 太郎"></div>
+        <div class="form-field"><label for="reg-email">メールアドレス</label><input id="reg-email" type="email" placeholder="you@example.com"></div>
+        <button class="btn-secondary" style="width:100%;">会員登録する</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="memberView" style="display:none;">
+    <h1 style="font-size:20px; margin-top:24px;">マイページ</h1>
+    <div class="mypage-grid">
+      <div class="mypage-card">
+        <h3>購入履歴</h3>
+        <p>紙の書籍・電子コンテンツの購入履歴をまとめて確認できます。</p>
+      </div>
+      <div class="mypage-card">
+        <h3>電子コンテンツ閲覧</h3>
+        <p>購入済みの電子コンテンツをここから直接開けます。</p>
+      </div>
+      <div class="mypage-card">
+        <h3>応募・問い合わせ履歴</h3>
+        <p>求人・物件への応募状況、広告掲載の問い合わせ履歴を確認できます。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    (刷新モック) 日本医事新報社 — <a href="index.html" style="color:#e3e8f5;">トップに戻る</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelector(".demo-toolbar").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-state]");
+    if (!btn) return;
+    document.querySelectorAll(".demo-toolbar button").forEach(function (b) {
+      b.classList.remove("active");
+      b.setAttribute("aria-pressed", "false");
+    });
+    btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
+    var isMember = btn.getAttribute("data-state") === "member";
+    document.getElementById("guestView").style.display = isMember ? "none" : "block";
+    document.getElementById("memberView").style.display = isMember ? "block" : "none";
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>検索結果(刷新モック) | メディカルパートナー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="audit-banner">
+  これは日本医事新報社サイトのUI/UX刷新<strong>提案用モック</strong>です。上部のボタンで「読み込み中 / 結果あり / 0件」の3状態を切り替えて確認できます。
+</div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="index.html">メディカルパートナー<small>日本医事新報社(刷新モック)</small></a>
+    <div style="flex:1"></div>
+    <div class="header-actions">
+      <button class="icon-btn">カート</button>
+      <a class="icon-btn" href="account.html">ログイン</a>
+      <a class="icon-btn primary" href="account.html">会員登録</a>
+    </div>
+  </div>
+  <div class="wrap search-row">
+    <form class="search-form" id="searchForm">
+      <input class="search-input" id="searchInput" type="search" placeholder="書籍・記事・動画・求人/物件をキーワードで検索" aria-label="サイト内検索">
+      <button class="search-submit" type="submit">検索</button>
+    </form>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; 検索結果</p>
+
+  <div class="results-head">
+    <h1 id="resultsTitle">検索結果</h1>
+    <p class="results-count" id="resultsCount"></p>
+  </div>
+
+  <div class="demo-toolbar">
+    <strong>デモ操作:</strong> 状態を切り替えて確認
+    <button type="button" data-state="loading" aria-pressed="false">読み込み中</button>
+    <button type="button" data-state="results" class="active" aria-pressed="true">結果あり</button>
+    <button type="button" data-state="empty" aria-pressed="false">0件</button>
+  </div>
+
+  <div class="tabs" role="tablist" id="tabs">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-zone="all">すべて</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-zone="books">出版物</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-zone="articles">記事</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-zone="videos">動画</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-zone="career">求人・物件</button>
+  </div>
+
+  <div class="state-panel">
+    <div id="loadingState" style="display:none;">
+      <div class="loading-row"><span class="spinner" aria-hidden="true"></span> <span id="loadingText"></span></div>
+    </div>
+
+    <div id="resultsState" class="card-grid" style="display:none;"></div>
+
+    <div id="emptyState" style="display:none;">
+      <div class="empty-state">
+        <h2 id="emptyTitle"></h2>
+        <p id="emptyHint"></p>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin: var(--space-6) 0;">
+    <h2 style="font-size:16px;">なぜこの画面設計にしたか</h2>
+    <p style="font-size:13px; color:var(--color-ink-soft); max-width:720px; line-height:1.9;">
+      現行サイトの検索結果ページは、サーバーが返すHTMLの中に実データの入らない空ループブロックが約30回繰り返され、
+      実際の結果は後からJavaScriptが差し込む二段構成になっています(検証結果は
+      <a href="https://github.com/yoshi2210/jmedj-web-renewal-demo/blob/master/docs/01_current_site_audit.md" style="color:var(--color-accent)">docs/01_current_site_audit.md 課題2</a> 参照)。
+      また検索ウィジェットの文言 (<code>"No results for "</code> など) が英語のまま残っています(課題1)。
+      下記は実際に取得したHTMLの抜粋と、本モックでの対応方針の比較です。
+    </p>
+    <div class="before-after">
+      <div class="col before">
+        <h4>現行サイト(実際に取得したHTML抜粋)</h4>
+        <pre>&lt;div class="common-box search-results"&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;!-- ...同様の空ブロックが約30回繰り返される... --&gt;
+
+noResultFor: "No results for ",
+noResultFound: "No result found",
+resultsFound: "results found",</pre>
+      </div>
+      <div class="col after">
+        <h4>本モックでの対応</h4>
+        <pre>&lt;!-- 0件時は意味のある日本語の空状態を1つだけ返す --&gt;
+&lt;div class="empty-state"&gt;
+  &lt;h2&gt;"糖尿病" に一致する
+      結果は見つかりませんでした&lt;/h2&gt;
+  &lt;p&gt;表記ゆれを変えて再検索して
+     みてください。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- 文言はすべて i18n リソース経由 --&gt;
+&lt;!-- data/i18n.ja.json 参照 --&gt;</pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    (刷新モック) 日本医事新報社 — <a href="index.html" style="color:#e3e8f5;">トップに戻る</a>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/search.js"></script>
+</body>
+</html>
