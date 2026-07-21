@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>日本医事新報社 — 百年の紙面から、次の百年の検索へ(刷新提案デモ)</title>
-<meta name="description" content="出版物・記事・動画・医師のための求人/物件。目的別ゾーンと検索ファーストで再設計した日本医事新報社サイトの刷新提案モック。">
+<title>カート | 日本医事新報社(刷新モックv2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet">
@@ -156,76 +155,26 @@
 </div>
 <!-- @@/HEADER@@ -->
 
-<main id="main">
+<main id="main" class="wrap">
+  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; カート</p>
 
-  <section class="hero">
-    <div class="wrap">
-      <p class="hero-kicker">SINCE 1921 — 医学週刊誌の百年</p>
-      <h1>診療の「いま知りたい」に、<em>3秒</em>で応える。</h1>
-      <div class="hero-search header-search">
-        <form class="search-form" action="search-results.html" method="get" role="search">
-          <input class="search-input" name="q" type="search"
-                 placeholder="病名・薬剤・診療報酬・書名で検索(例: 糖尿病)"
-                 aria-label="サイト内検索">
-          <button class="search-submit" type="submit">検索</button>
-        </form>
-      </div>
-      <div class="keyword-chips" id="heroChips" aria-label="人気の検索キーワード">
-        <a class="chip" href="search-results.html?q=%E7%B3%96%E5%B0%BF%E7%97%85">糖尿病</a>
-        <a class="chip" href="search-results.html?q=%E8%A8%BA%E7%99%82%E5%A0%B1%E9%85%AC%E6%94%B9%E5%AE%9A">診療報酬改定</a>
-        <a class="chip" href="search-results.html?q=%E6%84%9F%E6%9F%93%E7%97%87">感染症</a>
-        <a class="chip" href="search-results.html?q=%E3%83%AA%E3%82%A6%E3%83%9E%E3%83%81">リウマチ</a>
-        <a class="chip" href="search-results.html?q=%E5%91%BC%E5%90%B8%E5%99%A8">呼吸器</a>
-      </div>
-      <div class="zone-shortcuts">
-        <a class="zone-shortcut" data-zone="books" href="shop-books.html">出版物<small>書籍・電子・雑誌</small></a>
-        <a class="zone-shortcut" data-zone="articles" href="articles.html">Web医事新報<small>診療科別の記事</small></a>
-        <a class="zone-shortcut" data-zone="videos" href="videos.html">動画<small>医事新報チャンネル</small></a>
-        <a class="zone-shortcut" data-zone="career" href="career.html">求人・物件<small>ドクター求NAVI</small></a>
-      </div>
+  <div class="page-head">
+    <h1>カート</h1>
+  </div>
+
+  <div class="empty-state" style="max-width: 640px;">
+    <h2>カートは空です</h2>
+    <p>空のカートは行き止まりではなく、次の一冊への入口です(空状態設計のデモ)。</p>
+    <a class="btn-primary" href="shop-books.html">出版物ストアを見る</a>
+  </div>
+
+  <section class="zone-section">
+    <div class="zone-section-head">
+      <h2><span class="zone-dot books"></span>おすすめの出版物</h2>
+      <a class="more-link" href="shop-books.html">もっと見る →</a>
     </div>
+    <div class="card-grid" id="recommendGrid"></div>
   </section>
-
-  <section class="zone-section" data-zone="books">
-    <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot books"></span>出版物ストア</h2>
-        <a class="more-link" href="shop-books.html">もっと見る →</a>
-      </div>
-      <div class="card-grid" id="grid-books"></div>
-    </div>
-  </section>
-
-  <section class="zone-section" data-zone="articles">
-    <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot articles"></span>Web医事新報(記事)</h2>
-        <a class="more-link" href="articles.html">もっと見る →</a>
-      </div>
-      <div class="card-grid" id="grid-articles"></div>
-    </div>
-  </section>
-
-  <section class="zone-section" data-zone="videos">
-    <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot videos"></span>医事新報チャンネル</h2>
-        <a class="more-link" href="videos.html">もっと見る →</a>
-      </div>
-      <div class="card-grid" id="grid-videos"></div>
-    </div>
-  </section>
-
-  <section class="zone-section" data-zone="career">
-    <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot career"></span>医師のための求人・物件</h2>
-        <a class="more-link" href="career.html">もっと見る →</a>
-      </div>
-      <div class="card-grid" id="grid-career"></div>
-    </div>
-  </section>
-
 </main>
 
 <!-- @@FOOTER@@ -->
@@ -285,10 +234,7 @@
 <script src="assets/js/app.js"></script>
 <script>
   jmedjLoadContent(function (data) {
-    jmedjRenderGrid("grid-books", data.books.concat(data.ebooks), 4);
-    jmedjRenderGrid("grid-articles", data.articles, 4);
-    jmedjRenderGrid("grid-videos", data.videos, 4);
-    jmedjRenderGrid("grid-career", data.jobs.concat(data.properties), 4);
+    jmedjRenderGrid("recommendGrid", data.books.concat(data.ebooks), 4);
   });
 </script>
 </body>

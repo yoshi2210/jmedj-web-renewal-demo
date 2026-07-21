@@ -1,17 +1,21 @@
-# jmedj サイト刷新提案 — 公開デモ
+# jmedj サイト刷新提案 — 公開デモ(v2)
 
-これは日本医事新報社(https://www.jmedj.co.jp/)のUI/UX刷新提案の**公開デモ**です。GitHub Pages で配信しています。
+日本医事新報社(https://www.jmedj.co.jp/)のUI/UX刷新提案の**公開デモ**。GitHub Pages 配信。
 
-- **公開サイト(デモ)**: GitHub Pages の URL(リポジトリの Settings > Pages 参照)
-- **設計思想と Before/After**: [docs/08_design_philosophy_and_before_after.md](docs/08_design_philosophy_and_before_after.md)
-- **現状監査(証跡付き)**: [docs/01_current_site_audit.md](docs/01_current_site_audit.md)
+- **公開サイト**: https://yoshi2210.github.io/jmedj-web-renewal-demo/
+- **設計批判とv2原則(現行サイト+v1モックへの批判)**: [docs/11_design_critique_and_v2_principles.md](docs/11_design_critique_and_v2_principles.md)
+- **設計思想 / Before/After**: [docs/08_design_philosophy_and_before_after.md](docs/08_design_philosophy_and_before_after.md)
 
-## 位置づけ・免責
+## v2 の要点
 
-- 本デモは日本医事新報社の**公開ページのみ**を通常のブラウジングで分析した独自の提案であり、同社の公式サイトではありません。
-- 脆弱性診断・非公開領域へのアクセス等の侵入的なテストは**一切行っていません**([docs/05_security_and_compliance_scope.md](docs/05_security_and_compliance_scope.md))。
-- 表示データは公開タイトル等を元にしたデモ用サンプルで、本文コンテンツの複製ではありません。
-- 詳細な分析ドキュメント一式は別の private リポジトリで管理しています。本 public リポジトリは配信用のミラーです。
+検索ファースト(サジェスト+ライブ検索+件数タブ)、モバイルはボトムタブ+ドロワーでナビが消えない、死にリンクゼロ(会社概要/FAQ/お問い合わせ/お知らせ/サイトマップ/カートを実ページ化)、和紙×明朝×朱の編集ヘリテージ、スケルトン/空状態、a11y(スキップリンク/44pxタップ/focus-visible/reduced-motion)。全16ページ。
+
+## 免責
+
+- 公開ページのみを通常ブラウジングで分析した独自提案であり、同社の公式サイトではありません。
+- 脆弱性診断・非公開領域アクセス等の侵入的テストは行っていません([docs/05_security_and_compliance_scope.md](docs/05_security_and_compliance_scope.md))。
+- 表示データはデモ用サンプルで、本文コンテンツの複製ではありません。
+- 詳細な分析ドキュメント一式は別の private リポジトリで管理。本 public リポジトリは配信用ミラーです。
 
 ## ローカルで見る
 
