@@ -8,6 +8,14 @@
 
     document.title = item.title + " | 日本医事新報社(刷新モックv2)";
 
+    var media = document.getElementById("videoMedia");
+    if (media) {
+      var cover = jmedjCover(item);
+      cover.removeAttribute("aria-hidden");
+      cover.tabIndex = -1;
+      media.appendChild(cover);
+    }
+
     var chipEl = document.getElementById("videoChip");
     chipEl.textContent = item.category;
     chipEl.href = "videos.html";

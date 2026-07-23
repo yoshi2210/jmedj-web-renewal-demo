@@ -14,7 +14,10 @@
 
       var media = document.createElement("div");
       media.className = "detail-media";
-      media.textContent = "表紙イメージ(モックのため非掲載)";
+      var cover = jmedjCover(item);
+      cover.removeAttribute("aria-hidden");
+      cover.tabIndex = -1;
+      media.appendChild(cover);
       root.appendChild(media);
 
       var body = document.createElement("div");

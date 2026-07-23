@@ -83,30 +83,81 @@ function jmedjChipLabelFor(item) {
   return item.category || item.region || item.badge;
 }
 
+function jmedjCoverKind(item) {
+  if (item.zone === "books" || item.zone === "ebooks") return "book";
+  if (item.zone === "articles") return "article";
+  if (item.zone === "videos") return "video";
+  return "geo";
+}
+
+/* 生成カバー(実表紙は複製せず、メタ情報から決定論的に描く装飾ビジュアル)
+   docs/12_visual_discovery_and_benchmark.md の方針。
+   a11y: 装飾リンクとして aria-hidden + tabindex=-1(見出しリンク/CTAが唯一の到達経路) */
+function jmedjCover(item) {
+  function mk(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  var kind = jmedjCoverKind(item);
+  var cover = document.createElement("a");
+  cover.className = "cover cover-" + kind;
+  cover.setAttribute("data-zone", item.zone);
+  cover.href = jmedjHrefFor(item);
+  cover.setAttribute("aria-hidden", "true");
+  cover.tabIndex = -1;
+
+  if (kind === "book") {
+    cover.appendChild(mk("span", "cover-spine"));
+    cover.appendChild(mk("span", "cover-label", item.format === "電子" ? "電子版" : "日本医事新報社"));
+    cover.appendChild(mk("span", "cover-title", item.title));
+    if (item.author) cover.appendChild(mk("span", "cover-author", item.author));
+  } else if (kind === "article") {
+    cover.appendChild(mk("span", "cover-series", item.series || "記事"));
+    cover.appendChild(mk("span", "cover-cat", item.category || ""));
+  } else if (kind === "video") {
+    if (item.category) cover.appendChild(mk("span", "cover-vlabel", item.category));
+    cover.appendChild(mk("span", "cover-play"));
+    cover.appendChild(mk("span", "cover-dur", item.duration || "—:—"));
+  } else {
+    cover.appendChild(mk("span", "cover-pin"));
+    cover.appendChild(mk("span", "cover-region", item.region || ""));
+    cover.appendChild(mk("span", "cover-kind", item.zone === "jobs" ? "求人" : "物件"));
+  }
+  return cover;
+}
+
 function jmedjCard(item) {
   var el = document.createElement("article");
   el.className = "card";
   el.setAttribute("data-zone", item.zone);
 
+  el.appendChild(jmedjCover(item));
+
+  var body = document.createElement("div");
+  body.className = "card-body";
+
   var chip = document.createElement("a");
   chip.className = "card-chip";
   chip.href = jmedjChipHrefFor(item);
   chip.textContent = jmedjChipLabelFor(item);
-  el.appendChild(chip);
+  body.appendChild(chip);
 
   var h3 = document.createElement("h3");
   var titleLink = document.createElement("a");
   titleLink.href = jmedjHrefFor(item);
   titleLink.textContent = item.title;
   h3.appendChild(titleLink);
-  el.appendChild(h3);
+  body.appendChild(h3);
 
   var metaBits = [item.author, item.date].filter(Boolean);
   if (metaBits.length) {
     var meta = document.createElement("p");
     meta.className = "meta";
     meta.textContent = metaBits.join(" ・ ");
-    el.appendChild(meta);
+    body.appendChild(meta);
   }
 
   var foot = document.createElement("div");
@@ -127,8 +178,9 @@ function jmedjCard(item) {
   cta.href = jmedjHrefFor(item);
   cta.textContent = "詳しく見る →";
   foot.appendChild(cta);
-  el.appendChild(foot);
+  body.appendChild(foot);
 
+  el.appendChild(body);
   return el;
 }
 
