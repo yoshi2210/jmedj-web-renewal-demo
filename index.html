@@ -7,7 +7,7 @@
 <meta name="description" content="出版物・記事・動画・医師のための求人/物件。目的別ゾーンと検索ファーストで再設計した日本医事新報社サイトの刷新提案モック。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -31,6 +31,9 @@
     </a>
 
     <nav class="zone-nav" aria-label="主要メニュー">
+      <div class="zone-nav-item">
+        <a class="zone-nav-btn" href="search-results.html" style="color: var(--primary-deep);">さがす</a>
+      </div>
       <div class="zone-nav-item" data-zone="books">
         <button class="zone-nav-btn" aria-expanded="false">出版物<span class="chev" aria-hidden="true">▾</span></button>
         <div class="mega-panel">
@@ -160,8 +163,8 @@
 
   <section class="hero">
     <div class="wrap">
-      <p class="hero-kicker">SINCE 1921 — 医学週刊誌の百年</p>
-      <h1>診療の「いま知りたい」に、<em>3秒</em>で応える。</h1>
+      <p class="hero-kicker">MEDICAL PARTNER SINCE 1921</p>
+      <h1>まず、<em>さがす</em>。<br>診療の疑問から、次の一冊まで。</h1>
       <div class="hero-search header-search">
         <form class="search-form" action="search-results.html" method="get" role="search">
           <input class="search-input" name="q" type="search"
@@ -178,6 +181,7 @@
         <a class="chip" href="search-results.html?q=%E5%91%BC%E5%90%B8%E5%99%A8">呼吸器</a>
       </div>
       <div class="zone-shortcuts">
+        <p class="zone-shortcuts-label">カテゴリから探す</p>
         <a class="zone-shortcut" data-zone="books" href="shop-books.html">出版物<small>書籍・電子・雑誌</small></a>
         <a class="zone-shortcut" data-zone="articles" href="articles.html">Web医事新報<small>診療科別の記事</small></a>
         <a class="zone-shortcut" data-zone="videos" href="videos.html">動画<small>医事新報チャンネル</small></a>
@@ -275,8 +279,11 @@
 
 <nav class="bottom-nav" aria-label="モバイルナビゲーション">
   <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>ホーム</span></a>
-  <a href="search-results.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>さがす</span></a>
   <a href="shop-books.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v16H6a2 2 0 0 1-2-2zM13 4h7v16h-5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>出版物</span></a>
+  <a class="bn-search" href="search-results.html" aria-label="さがす(サイト内検索)">
+    <span class="bn-fab"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    <span>さがす</span>
+  </a>
   <a href="articles.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>記事</span></a>
   <a href="account.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>マイページ</span></a>
 </nav>
