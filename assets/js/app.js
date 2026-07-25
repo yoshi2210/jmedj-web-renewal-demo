@@ -21,15 +21,25 @@ function jmedjLoadContent(onReady) {
   if (_jmedjContent) { onReady(_jmedjContent); return; }
   _jmedjContentWaiters.push(onReady);
   if (_jmedjContentWaiters.length > 1) return;
-  fetch("data/sample-content.json")
-    .then(function (res) { return res.json(); })
+  function readJson(path) {
+    return fetch(path).then(function (res) {
+      if (!res.ok) throw new Error(path + " returned " + res.status);
+      return res.json();
+    });
+  }
+  readJson("data/live-content.json")
+    .catch(function (liveError) {
+      console.warn("公開メタデータの静的キャッシュを読めないためサンプルへ切り替えます", liveError);
+      return readJson("data/sample-content.json");
+    })
     .then(function (data) {
       _jmedjContent = data;
       _jmedjContentWaiters.forEach(function (cb) { cb(data); });
       _jmedjContentWaiters = [];
     })
     .catch(function (err) {
-      console.error("sample-content.json の読み込みに失敗しました", err);
+      console.error("コンテンツデータの読み込みに失敗しました", err);
+      _jmedjContentWaiters = [];
     });
 }
 
@@ -81,6 +91,17 @@ function jmedjCtaFor(item) {
   return "詳細を見る →";
 }
 
+function jmedjOfficialLink(item, label) {
+  if (!item.sourceUrl) return null;
+  var link = document.createElement("a");
+  link.className = "btn-secondary official-source-link";
+  link.href = item.sourceUrl;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = label || "公式ページで確認 ↗";
+  return link;
+}
+
 function jmedjDateLabelFor(item) {
   if (!item.date) return "";
   if (item.zone === "books" || item.zone === "ebooks") return "刊行";
@@ -106,8 +127,7 @@ function jmedjCoverKind(item) {
   return "geo";
 }
 
-/* 生成カバー(実表紙は複製せず、メタ情報から決定論的に描く装飾ビジュアル)
-   docs/12_visual_discovery_and_benchmark.md の方針。
+/* 公開サムネイルがある場合は静的キャッシュを表示し、なければ生成カバーを使う。
    a11y: 装飾リンクとして aria-hidden + tabindex=-1(見出しリンク/CTAが唯一の到達経路) */
 function jmedjCover(item) {
   function mk(tag, cls, text) {
@@ -125,7 +145,20 @@ function jmedjCover(item) {
   cover.setAttribute("aria-hidden", "true");
   cover.tabIndex = -1;
 
-  if (kind === "book") {
+  if (item.image) {
+    cover.classList.add("has-image");
+    var image = document.createElement("img");
+    image.className = "cover-image";
+    image.src = item.image;
+    image.alt = "";
+    image.loading = "lazy";
+    image.decoding = "async";
+    cover.appendChild(image);
+    if (kind === "video") {
+      cover.appendChild(mk("span", "cover-play"));
+      if (item.duration) cover.appendChild(mk("span", "cover-dur", item.duration));
+    }
+  } else if (kind === "book") {
     cover.appendChild(mk("span", "cover-spine"));
     cover.appendChild(mk("span", "cover-label", item.format === "電子" ? "電子版" : "日本医事新報社"));
     cover.appendChild(mk("span", "cover-title", item.title));

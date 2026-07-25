@@ -67,26 +67,46 @@
 <main id="main">
   <section class="hero">
     <div class="wrap">
-      <p class="hero-kicker">1921年創刊　医学と医療の現在を伝える</p>
-      <h1>百年の編集知を、<em>目の前の診療へ。</em></h1>
-      <p class="hero-lead">病名・薬剤名・診療領域から、記事、書籍、動画を横断して探せます。公開日と情報の種類を確かめながら、必要な情報へ進めます。</p>
-      <div class="hero-search">
-        <form class="search-form" action="search-results.html" method="get" role="search">
-          <label class="visually-hidden" for="homeSearch">サイト内検索</label>
-          <input class="search-input" name="q" id="homeSearch" type="search"
-                 placeholder="病名・薬剤名・診療報酬・書名で検索" autocomplete="off">
-          <button class="search-submit" type="submit">検索する</button>
-        </form>
-      </div>
-      <div class="keyword-chips" id="heroChips" aria-label="よく検索されるキーワード">
-        <a class="chip" href="search-results.html?q=%E7%B3%96%E5%B0%BF%E7%97%85">糖尿病</a>
-        <a class="chip" href="search-results.html?q=%E8%A8%BA%E7%99%82%E5%A0%B1%E9%85%AC%E6%94%B9%E5%AE%9A">診療報酬改定</a>
-        <a class="chip" href="search-results.html?q=%E6%84%9F%E6%9F%93%E7%97%87">感染症</a>
-        <a class="chip" href="search-results.html?q=%E3%83%AA%E3%82%A6%E3%83%9E%E3%83%81">リウマチ</a>
-        <a class="chip" href="search-results.html?q=%E5%91%BC%E5%90%B8%E5%99%A8">呼吸器</a>
-      </div>
-      <div class="trust-line" aria-label="掲載情報の確認項目">
-        <span>公開・刊行日</span><span>著者・監修者</span><span>記事・書籍・動画の種別</span>
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <p class="hero-kicker">1921年創刊　医学と医療の現在を伝える</p>
+          <h1>百年の編集知を、<br><em>目の前の診療へ。</em></h1>
+          <p class="hero-lead">病名・薬剤名・診療領域から、記事、書籍、動画を横断して探せます。公開日と情報の種類を確かめながら、必要な情報へ進めます。</p>
+          <div class="hero-search">
+            <form class="search-form" action="search-results.html" method="get" role="search">
+              <label class="visually-hidden" for="homeSearch">サイト内検索</label>
+              <input class="search-input" name="q" id="homeSearch" type="search"
+                     placeholder="病名・薬剤名・書名で検索" autocomplete="off">
+              <button class="search-submit" type="submit">検索する</button>
+            </form>
+          </div>
+          <div class="keyword-chips" id="heroChips" aria-label="よく検索されるキーワード">
+            <a class="chip" href="search-results.html?q=%E7%B3%96%E5%B0%BF%E7%97%85">糖尿病</a>
+            <a class="chip" href="search-results.html?q=%E8%A8%BA%E7%99%82%E5%A0%B1%E9%85%AC%E6%94%B9%E5%AE%9A">診療報酬改定</a>
+            <a class="chip" href="search-results.html?q=%E6%84%9F%E6%9F%93%E7%97%87">感染症</a>
+            <a class="chip" href="search-results.html?q=%E3%83%AA%E3%82%A6%E3%83%9E%E3%83%81">リウマチ</a>
+            <a class="chip" href="search-results.html?q=%E5%91%BC%E5%90%B8%E5%99%A8">呼吸器</a>
+          </div>
+          <div class="trust-line" aria-label="掲載情報の確認項目">
+            <span>公開・刊行日</span><span>著者・監修者</span><span>記事・書籍・動画の種別</span>
+          </div>
+        </div>
+
+        <aside class="editorial-board" aria-labelledby="editorial-board-title">
+          <div class="editorial-board-head">
+            <div><span>本日の編集面</span><strong id="editorial-board-title">新着から読む</strong></div>
+            <time id="editorialDate"></time>
+          </div>
+          <a class="editorial-feature" id="editorialFeature" href="shop-books.html">
+            <span class="editorial-feature-image" aria-hidden="true"></span>
+            <span class="editorial-feature-copy">
+              <small>新刊</small>
+              <strong>公開情報を読み込んでいます</strong>
+            </span>
+          </a>
+          <ol class="editorial-index" id="editorialIndex"></ol>
+          <p class="editorial-source">日本医事新報社の公開情報を静的キャッシュで表示</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -116,6 +136,17 @@
         <a class="more-link" href="search-results.html">すべて検索する →</a>
       </div>
       <div class="card-grid" id="grid-latest"></div>
+    </div>
+  </section>
+
+  <section class="news-section" aria-labelledby="news-title">
+    <div class="wrap news-layout">
+      <div class="section-heading">
+        <p class="eyebrow">運営からのお知らせ</p>
+        <h2 id="news-title">大切なお知らせ</h2>
+        <p>メンテナンスや商品対応など、利用前に確認したい情報です。</p>
+      </div>
+      <div class="news-list" id="liveNews" aria-live="polite"></div>
     </div>
   </section>
 
@@ -161,7 +192,7 @@
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <p>日本医事新報社 サイト刷新提案デモ（非公式）／表示内容は検証用サンプルです。</p>
+    <p>日本医事新報社 サイト刷新提案デモ（非公式）／公開メタデータ・画像の権利は各権利者に帰属します。</p>
     <p>百年の編集知を、次の診療判断へ。</p>
   </div>
 </footer>
@@ -173,6 +204,74 @@
     var latest = [].concat(data.articles, data.books, data.ebooks, data.videos)
       .sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
     jmedjRenderGrid("grid-latest", latest, 8);
+
+    var date = document.getElementById("editorialDate");
+    if (date && data.generatedAt) {
+      var generated = new Date(data.generatedAt);
+      date.dateTime = data.generatedAt;
+      date.textContent = generated.toLocaleDateString("ja-JP", {
+        year: "numeric", month: "2-digit", day: "2-digit"
+      });
+    }
+
+    var feature = data.books && data.books[0];
+    var featureLink = document.getElementById("editorialFeature");
+    if (feature && featureLink) {
+      featureLink.href = jmedjHrefFor(feature);
+      var imageRoot = featureLink.querySelector(".editorial-feature-image");
+      if (feature.image) {
+        var image = document.createElement("img");
+        image.src = feature.image;
+        image.alt = "";
+        image.loading = "eager";
+        image.decoding = "async";
+        imageRoot.appendChild(image);
+      }
+      featureLink.querySelector("small").textContent = feature.contentType + "・新着";
+      featureLink.querySelector("strong").textContent = feature.title;
+    }
+
+    var editorialItems = [].concat(data.articles || [], data.videos || []).slice(0, 3);
+    var editorialIndex = document.getElementById("editorialIndex");
+    editorialItems.forEach(function (item, index) {
+      var li = document.createElement("li");
+      var link = document.createElement("a");
+      link.href = jmedjHrefFor(item);
+      var number = document.createElement("span");
+      number.textContent = String(index + 1).padStart(2, "0");
+      var copy = document.createElement("span");
+      var kind = document.createElement("small");
+      kind.textContent = item.contentType + (item.date ? "　" + item.date.replace(/-/g, ".") : "");
+      var title = document.createElement("strong");
+      title.textContent = item.title;
+      copy.appendChild(kind);
+      copy.appendChild(title);
+      link.appendChild(number);
+      link.appendChild(copy);
+      li.appendChild(link);
+      editorialIndex.appendChild(li);
+    });
+
+    var news = document.getElementById("liveNews");
+    (data.news || []).slice(0, 4).forEach(function (item) {
+      var article = document.createElement("article");
+      var meta = document.createElement("p");
+      var time = document.createElement("time");
+      time.dateTime = item.date.replace(/\./g, "-");
+      time.textContent = item.date;
+      var category = document.createElement("span");
+      category.textContent = item.category || "お知らせ";
+      meta.appendChild(time);
+      meta.appendChild(category);
+      var link = document.createElement("a");
+      link.href = item.sourceUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = item.title + " ↗";
+      article.appendChild(meta);
+      article.appendChild(link);
+      news.appendChild(article);
+    });
   });
 </script>
 </body>
