@@ -1,10 +1,24 @@
-# jmedj サイト刷新提案 — 公開デモ(v4)
+# jmedj サイト刷新提案 — 公開デモ(v6)
 
 日本医事新報社(https://www.jmedj.co.jp/)のUI/UX刷新提案の**公開デモ**。GitHub Pages 配信。
 
 - **公開サイト**: https://yoshi2210.github.io/jmedj-web-renewal-demo/
 - **現代サービスとの比較評価 / ビジュアル探索方針**: [docs/12_visual_discovery_and_benchmark.md](docs/12_visual_discovery_and_benchmark.md)
 - **設計批判と原則(改訂履歴)**: [docs/11_design_critique_and_v2_principles.md](docs/11_design_critique_and_v2_principles.md)
+- **医療従事者向けエンタープライズ品質の再評価(v5)**: [docs/13_enterprise_quality_reassessment.md](docs/13_enterprise_quality_reassessment.md)
+- **新報藍デザインシステム(v6)**: [docs/07_design_system.md](docs/07_design_system.md)
+
+## v6 の要点
+
+- **白い紙面 + 新報藍**: `#174A7E`を唯一の主色にし、グラデーションと多色ゾーンを廃止。
+- **編集文化のモダナイゼーション**: 明朝の編集見出し、藍の縦罫、細い区切り線を残し、操作部品は現代的なゴシックと明確な状態表示で統一。
+- **装飾を削減**: 強い影、カードの浮き上がり、過剰な角丸を抑え、情報の種別・日付・行動を優先。
+
+## v5 の要点
+
+- **医療情報としての見方を設計**: トップを利用目的から入れる構成にし、公開／刊行日・コンテンツ種別・情報利用上の注意を明確化。本番で必要な編集メタデータも仕様化。
+- **アクセシビリティを対話まで拡張**: 検索候補の`aria-activedescendant`、モバイルメニューのフォーカストラップと起点復帰を追加。
+- v4から継続: サムネで探せる、検索ファースト、ライブ検索+サジェスト、死にリンクゼロ、全16ページ。
 
 ## v4 の要点
 

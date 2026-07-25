@@ -83,6 +83,30 @@ function jmedjChipLabelFor(item) {
   return item.category || item.region || item.badge;
 }
 
+function jmedjCtaFor(item) {
+  if (item.zone === "jobs") return "募集を見る →";
+  if (item.zone === "properties") return "物件を見る →";
+  if (item.zone === "videos") return "動画を見る →";
+  if (item.zone === "articles") return "記事を読む →";
+  return "詳細を見る →";
+}
+
+function jmedjDateLabelFor(item) {
+  if (!item.date) return "";
+  if (item.zone === "books" || item.zone === "ebooks") return "刊行";
+  if (item.zone === "videos") return "公開";
+  return "掲載";
+}
+
+function jmedjCardMetaFor(item) {
+  var bits = [];
+  if (item.zone === "articles" && item.series) bits.push(item.series);
+  if ((item.zone === "jobs" || item.zone === "properties") && item.employment) bits.push(item.employment);
+  if ((item.zone === "jobs" || item.zone === "properties") && item.region) bits.push(item.region);
+  if (item.author) bits.push(item.author);
+  return bits;
+}
+
 function jmedjCoverKind(item) {
   if (item.zone === "books" || item.zone === "ebooks") return "book";
   if (item.zone === "articles") return "article";
@@ -143,6 +167,7 @@ function jmedjCard(item) {
   chip.className = "card-chip";
   chip.href = jmedjChipHrefFor(item);
   chip.textContent = jmedjChipLabelFor(item);
+  chip.setAttribute("aria-label", jmedjChipLabelFor(item) + "で絞り込む");
   body.appendChild(chip);
 
   var h3 = document.createElement("h3");
@@ -152,11 +177,18 @@ function jmedjCard(item) {
   h3.appendChild(titleLink);
   body.appendChild(h3);
 
-  var metaBits = [item.author, item.date].filter(Boolean);
-  if (metaBits.length) {
+  var metaBits = jmedjCardMetaFor(item);
+  if (metaBits.length || item.date) {
     var meta = document.createElement("p");
     meta.className = "meta";
-    meta.textContent = metaBits.join(" ・ ");
+    if (metaBits.length) meta.appendChild(document.createTextNode(metaBits.join(" ・ ")));
+    if (item.date) {
+      var date = document.createElement("time");
+      date.dateTime = item.date;
+      date.textContent = jmedjDateLabelFor(item) + " " + item.date.replace(/-/g, "/");
+      if (metaBits.length) meta.appendChild(document.createTextNode("　"));
+      meta.appendChild(date);
+    }
     body.appendChild(meta);
   }
 
@@ -176,7 +208,7 @@ function jmedjCard(item) {
   var cta = document.createElement("a");
   cta.className = "card-cta";
   cta.href = jmedjHrefFor(item);
-  cta.textContent = "詳しく見る →";
+  cta.textContent = jmedjCtaFor(item);
   foot.appendChild(cta);
   body.appendChild(foot);
 
@@ -251,11 +283,33 @@ function jmedjRenderSkeleton(container, count) {
   var drawer = document.getElementById("mobileDrawer");
   if (!toggle || !drawer) return;
 
+  var lastFocused = null;
+  drawer.setAttribute("role", "dialog");
+  drawer.setAttribute("aria-modal", "true");
+  drawer.setAttribute("aria-label", "サイトメニュー");
+  var close = document.createElement("button");
+  close.type = "button";
+  close.className = "drawer-close";
+  close.setAttribute("aria-label", "メニューを閉じる");
+  close.textContent = "閉じる";
+  drawer.querySelector(".drawer-inner").insertBefore(close, drawer.querySelector(".drawer-inner").firstChild);
+
+  function focusableItems() {
+    return Array.prototype.slice.call(drawer.querySelectorAll('a[href], button:not([disabled]), summary'));
+  }
+
   function setOpen(open) {
+    if (open) lastFocused = document.activeElement;
     drawer.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
     document.body.classList.toggle("drawer-open", open);
+    if (open) {
+      window.setTimeout(function () { close.focus(); }, 0);
+    } else if (lastFocused) {
+      lastFocused.focus();
+      lastFocused = null;
+    }
   }
 
   toggle.addEventListener("click", function () {
@@ -264,8 +318,15 @@ function jmedjRenderSkeleton(container, count) {
   drawer.addEventListener("click", function (e) {
     if (e.target === drawer) setOpen(false); /* 背景タップで閉じる */
   });
+  close.addEventListener("click", function () { setOpen(false); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !drawer.hidden) setOpen(false);
+    if (e.key !== "Tab" || drawer.hidden) return;
+    var items = focusableItems();
+    if (!items.length) return;
+    var first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 })();
 
@@ -281,6 +342,9 @@ function jmedjRenderSkeleton(container, count) {
 
   var RECENT_KEY = "jmedj_recent_searches";
   var activeIndex = -1;
+  var optionSerial = 0;
+  input.setAttribute("role", "combobox");
+  input.setAttribute("aria-autocomplete", "list");
 
   function getRecent() {
     try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); }
@@ -298,14 +362,17 @@ function jmedjRenderSkeleton(container, count) {
     panel.hidden = true;
     panel.innerHTML = "";
     input.setAttribute("aria-expanded", "false");
+    input.removeAttribute("aria-activedescendant");
     activeIndex = -1;
   }
 
   function addItem(opts) {
-    var el = document.createElement("div");
+    var el = document.createElement("button");
+    el.type = "button";
     el.className = "suggest-item" + (opts.go ? " suggest-go" : "");
     el.setAttribute("role", "option");
     el.setAttribute("aria-selected", "false");
+    el.id = "suggest-option-" + (++optionSerial);
     if (opts.zone) el.setAttribute("data-zone", opts.zone);
     if (!opts.go) {
       var dot = document.createElement("span");
@@ -396,6 +463,7 @@ function jmedjRenderSkeleton(container, count) {
       items.forEach(function (el, i) {
         el.setAttribute("aria-selected", String(i === activeIndex));
       });
+      input.setAttribute("aria-activedescendant", items[activeIndex].id);
     } else if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
       items[activeIndex].dispatchEvent(new MouseEvent("mousedown"));
