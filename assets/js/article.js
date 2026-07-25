@@ -12,7 +12,15 @@
     chipEl.textContent = item.series + " / " + item.category;
     chipEl.href = "articles.html";
     document.getElementById("articleTitle").textContent = item.title;
-    document.getElementById("articleDesc").textContent = item.desc;
+    var desc = document.getElementById("articleDesc");
+    desc.textContent = item.desc;
+    var official = jmedjOfficialLink(item, "公式サイトで本文を読む ↗");
+    if (official) {
+      var actions = document.createElement("div");
+      actions.className = "detail-actions";
+      actions.appendChild(official);
+      desc.insertAdjacentElement("afterend", actions);
+    }
 
     var meta = document.getElementById("articleMeta");
     [item.author, item.date].filter(Boolean).forEach(function (t) {

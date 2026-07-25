@@ -67,6 +67,8 @@
       sample.textContent = item.format === "電子" ? "試し読み" : "在庫を確認";
       actions.appendChild(buy);
       actions.appendChild(sample);
+      var official = jmedjOfficialLink(item, "公式の商品ページで確認 ↗");
+      if (official) actions.appendChild(official);
       body.appendChild(actions);
 
       root.appendChild(body);

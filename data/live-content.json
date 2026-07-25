@@ -1,0 +1,456 @@
+{
+  "_note": "サイトオーナーの許可のもと、公開一覧のメタデータと少数のサムネイルを低頻度で取得した静的キャッシュです。本文・認証領域は取得していません。",
+  "generatedAt": "2026-07-25T13:18:01+00:00",
+  "source": "https://www.jmedj.co.jp",
+  "books": [
+    {
+      "id": "live-product-9784784933006",
+      "zone": "books",
+      "contentType": "書籍",
+      "format": "紙",
+      "clinicalArea": "精神科",
+      "topic": "書籍",
+      "category": "書籍",
+      "tags": [
+        "hasPromoMaterials_true",
+        "mediaType_紙"
+      ],
+      "title": "ジェネラリストのための うつの診かた",
+      "meta": "書籍 / 定価 3,850円(税込)",
+      "badge": "紙",
+      "price": 3850,
+      "date": "2026-06-22",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-9784784933006.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/products/9784784933006"
+    },
+    {
+      "id": "live-product-9784784902859",
+      "zone": "books",
+      "contentType": "書籍",
+      "format": "紙",
+      "clinicalArea": "麻酔科",
+      "topic": "書籍",
+      "category": "書籍",
+      "tags": [
+        "mediaType_紙"
+      ],
+      "title": "小児麻酔の知識と技",
+      "meta": "書籍 / 定価 7,150円(税込)",
+      "badge": "紙",
+      "price": 7150,
+      "date": "2026-06-22",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-9784784902859.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/products/9784784902859"
+    },
+    {
+      "id": "live-product-9784784905508",
+      "zone": "books",
+      "contentType": "書籍",
+      "format": "紙",
+      "clinicalArea": "血管外科",
+      "topic": "書籍",
+      "category": "書籍",
+      "tags": [
+        "mediaType_紙"
+      ],
+      "title": "新・下肢静脈瘤硬化療法",
+      "meta": "書籍 / 定価 13,200円(税込)",
+      "badge": "紙",
+      "price": 13200,
+      "date": "2026-06-19",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-9784784905508.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/products/9784784905508"
+    },
+    {
+      "id": "live-product-9784784902903",
+      "zone": "books",
+      "contentType": "書籍",
+      "format": "紙",
+      "clinicalArea": "脳神経内科",
+      "topic": "書籍",
+      "category": "書籍",
+      "tags": [
+        "mediaType_紙"
+      ],
+      "title": "臨床医のための 高次脳機能障害診療ノート",
+      "meta": "書籍 / 定価 7,480円(税込)",
+      "badge": "紙",
+      "price": 7480,
+      "date": "2026-06-02",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-9784784902903.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/products/9784784902903"
+    }
+  ],
+  "ebooks": [
+    {
+      "id": "e1",
+      "zone": "ebooks",
+      "contentType": "電子版",
+      "format": "電子",
+      "clinicalArea": "循環器内科",
+      "topic": "検査・診断",
+      "category": "循環器",
+      "tags": [
+        "VExUS",
+        "超音波",
+        "静脈うっ血"
+      ],
+      "title": "実践VExUS〈静脈うっ血を見抜き治療につなげる超音波評価〉",
+      "meta": "電子コンテンツ / 定価 2,970円(本体2,700円+税)",
+      "badge": "電子",
+      "price": 2970,
+      "date": "2026-05-01",
+      "author": "著 循環器内科医",
+      "desc": "超音波を用いた静脈うっ血評価(VExUS)の考え方と実践手順を解説(デモ用要約)。"
+    },
+    {
+      "id": "e2",
+      "zone": "ebooks",
+      "contentType": "電子版",
+      "format": "電子",
+      "clinicalArea": "腎臓内科",
+      "topic": "病態・治療",
+      "category": "循環器",
+      "tags": [
+        "心腎連関",
+        "腎うっ血"
+      ],
+      "title": "腎うっ血の正体に迫る",
+      "meta": "電子コンテンツ / 定価 1,980円(本体1,800円+税)",
+      "badge": "電子",
+      "price": 1980,
+      "date": "2026-04-01",
+      "author": "著 腎臓内科医",
+      "desc": "心腎連関の観点から腎うっ血のメカニズムと評価法を整理(デモ用要約)。"
+    },
+    {
+      "id": "e3",
+      "zone": "ebooks",
+      "contentType": "電子版",
+      "format": "電子",
+      "clinicalArea": "形成外科",
+      "topic": "基本手技",
+      "category": "外科",
+      "tags": [
+        "切開",
+        "縫合",
+        "注射"
+      ],
+      "title": "美容外科医になるための超基本手技〈切開，縫合，注射〉",
+      "meta": "電子コンテンツ / 定価 1,980円(本体1,800円+税)",
+      "badge": "電子",
+      "price": 1980,
+      "date": "2026-03-01",
+      "author": "著 美容外科医",
+      "desc": "美容外科の基本手技を写真・図解で解説する入門コンテンツ(デモ用要約)。"
+    },
+    {
+      "id": "e4",
+      "zone": "ebooks",
+      "contentType": "電子版",
+      "format": "電子",
+      "clinicalArea": "検査医学",
+      "topic": "検査・診断",
+      "category": "検査",
+      "tags": [
+        "血液検査",
+        "Pearl",
+        "Pitfall"
+      ],
+      "title": "血液検査について考え直す〈再考から導き出されたPearl & Pitfall〉",
+      "meta": "電子コンテンツ / 定価 990円(本体900円+税)",
+      "badge": "電子",
+      "price": 990,
+      "date": "2026-02-01",
+      "author": "著 検査医学専門医",
+      "desc": "日常診療で見落としがちな血液検査解釈のポイントを整理(デモ用要約)。"
+    }
+  ],
+  "articles": [
+    {
+      "id": "live-article-product_28921",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "全科共通",
+      "topic": "臨床・医療",
+      "editorialFormat": "プラタナス",
+      "category": "全科共通",
+      "series": "プラタナス エッセイ",
+      "access": "公式サイト",
+      "tags": [
+        "プラタナス",
+        "全科共通"
+      ],
+      "title": "ATPが導いた私の医学（高橋利匡）［プラタナス］",
+      "meta": "プラタナス / 全科共通 / 高橋利匡",
+      "badge": "記事",
+      "date": "2026-07-25",
+      "updated": "2026-07-25",
+      "author": "高橋利匡",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28921.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28921"
+    },
+    {
+      "id": "live-article-product_28938",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "救命救急",
+      "topic": "臨床・医療",
+      "editorialFormat": "企画",
+      "category": "救命救急",
+      "series": "企画 救命救急",
+      "access": "公式サイト",
+      "tags": [
+        "企画",
+        "救命救急"
+      ],
+      "title": "熱疲労に注意！ 特徴は頭痛，嘔吐，倦怠感……熱中症で頭痛が起こるのはなぜ？【熱中症の謎となぜ】",
+      "meta": "企画 / 救命救急 / 一二三 亨",
+      "badge": "記事",
+      "date": "2026-07-25",
+      "updated": "2026-07-25",
+      "author": "一二三 亨",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28938.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28938"
+    },
+    {
+      "id": "live-article-product_28910",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "脳神経外科",
+      "topic": "臨床・医療",
+      "editorialFormat": "私の治療",
+      "category": "脳神経外科",
+      "series": "私の治療 脳神経外科",
+      "access": "公式サイト",
+      "tags": [
+        "私の治療",
+        "脳神経外科"
+      ],
+      "title": "脳動脈瘤［私の治療］",
+      "meta": "私の治療 / 脳神経外科 / 吉村紳一",
+      "badge": "記事",
+      "date": "2026-07-25",
+      "updated": "2026-07-25",
+      "author": "吉村紳一",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28910.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28910"
+    },
+    {
+      "id": "live-article-product_28920",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "感染症",
+      "topic": "臨床・医療",
+      "editorialFormat": "学術・連載",
+      "category": "感染症",
+      "series": "学術・連載 感染症",
+      "access": "公式サイト",
+      "tags": [
+        "学術・連載",
+        "感染症"
+      ],
+      "title": "英国で発生した美容医療関連のボツリヌス症のアウトブレイク［感染症今昔物語ー話題の感染症ピックアップー（49）］",
+      "meta": "学術・連載 / 感染症 / 石金正裕",
+      "badge": "記事",
+      "date": "2026-07-24",
+      "updated": "2026-07-24",
+      "author": "石金正裕",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28920.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28920"
+    }
+  ],
+  "videos": [
+    {
+      "id": "live-video-movie_229",
+      "zone": "videos",
+      "contentType": "動画",
+      "clinicalArea": "全科共通",
+      "topic": "動画で学ぶ",
+      "editorialFormat": "解説・セミナー",
+      "category": "医事新報チャンネル",
+      "tags": [
+        "動画",
+        "医学教育"
+      ],
+      "title": "【医療関係者向けシリーズ企画・クリニックの地域医療戦略】診療報酬改定2026最速解説① 2026年度改定の全体像（小松大介）",
+      "meta": "医事新報チャンネル",
+      "badge": "動画",
+      "date": "",
+      "author": "",
+      "duration": "",
+      "desc": "日本医事新報社の公開動画メタデータです。視聴条件は公式ページでご確認ください。",
+      "image": "assets/images/live/video-movie_229.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/movie/movie_229"
+    },
+    {
+      "id": "live-video-movie_222",
+      "zone": "videos",
+      "contentType": "動画",
+      "clinicalArea": "全科共通",
+      "topic": "動画で学ぶ",
+      "editorialFormat": "解説・セミナー",
+      "category": "医事新報チャンネル",
+      "tags": [
+        "動画",
+        "医学教育"
+      ],
+      "title": "【医療関係者向けシリーズ企画・クリニックの地域医療戦略】南海トラフ巨大地震対策を地域医療に活かす① 想定されるリスクと黒潮町の取り組み（草場鉄周×澤田努×香田将英）",
+      "meta": "医事新報チャンネル",
+      "badge": "動画",
+      "date": "",
+      "author": "",
+      "duration": "",
+      "desc": "日本医事新報社の公開動画メタデータです。視聴条件は公式ページでご確認ください。",
+      "image": "assets/images/live/video-movie_222.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/movie/movie_222"
+    },
+    {
+      "id": "live-video-movie_216",
+      "zone": "videos",
+      "contentType": "動画",
+      "clinicalArea": "全科共通",
+      "topic": "動画で学ぶ",
+      "editorialFormat": "解説・セミナー",
+      "category": "医事新報チャンネル",
+      "tags": [
+        "動画",
+        "医学教育"
+      ],
+      "title": "【医療関係者向けシリーズ企画・クリニックの地域医療戦略】「かかりつけ医機能報告」は未来の地域医療をどう形づくるか① 制度開始に向け何を、どう準備するか（松村真司×大橋博樹×二木 立）",
+      "meta": "医事新報チャンネル",
+      "badge": "動画",
+      "date": "",
+      "author": "",
+      "duration": "",
+      "desc": "日本医事新報社の公開動画メタデータです。視聴条件は公式ページでご確認ください。",
+      "image": "assets/images/live/video-movie_216.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/movie/movie_216"
+    },
+    {
+      "id": "live-video-movie_215",
+      "zone": "videos",
+      "contentType": "動画",
+      "clinicalArea": "全科共通",
+      "topic": "動画で学ぶ",
+      "editorialFormat": "解説・セミナー",
+      "category": "医事新報チャンネル",
+      "tags": [
+        "動画",
+        "医学教育"
+      ],
+      "title": "髙野 哲史「レジデントのための 感染症診療の組み立て方」",
+      "meta": "医事新報チャンネル",
+      "badge": "動画",
+      "date": "",
+      "author": "",
+      "duration": "",
+      "desc": "日本医事新報社の公開動画メタデータです。視聴条件は公式ページでご確認ください。",
+      "image": "assets/images/live/video-movie_215.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/movie/movie_215"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "j1",
+      "zone": "jobs",
+      "region": "京都府",
+      "employment": "常勤",
+      "title": "一般財団法人 仁風会 嵯峨野病院",
+      "meta": "求人情報 / 京都府京都市",
+      "badge": "求人",
+      "date": "2026-07-01",
+      "desc": "京都市内の病院における常勤医師募集(デモ用要約)。"
+    },
+    {
+      "id": "j2",
+      "zone": "jobs",
+      "region": "岩手県",
+      "employment": "常勤",
+      "title": "医療法人 三秋会 介護老人保健施設 さわなり苑",
+      "meta": "求人情報 / 岩手県西磐井郡平泉町",
+      "badge": "求人",
+      "date": "2026-06-15",
+      "desc": "介護老人保健施設における医師募集(デモ用要約)。"
+    },
+    {
+      "id": "j3",
+      "zone": "jobs",
+      "region": "全国",
+      "employment": "非常勤",
+      "title": "厚生労働省 検疫医療専門職",
+      "meta": "求人情報 / 全国主要海港・空港の検疫所",
+      "badge": "求人",
+      "date": "2026-05-20",
+      "desc": "全国の検疫所における医療専門職の募集(デモ用要約)。"
+    }
+  ],
+  "properties": [
+    {
+      "id": "p1",
+      "zone": "properties",
+      "region": "神奈川県",
+      "usage": "医療ビル",
+      "title": "（仮称）元住吉メディカルセンター",
+      "meta": "物件情報 / 神奈川県川崎市",
+      "badge": "物件",
+      "date": "2026-07-01",
+      "desc": "川崎市内で計画中の医療ビル物件情報(デモ用要約)。"
+    },
+    {
+      "id": "p2",
+      "zone": "properties",
+      "region": "愛知県",
+      "usage": "貸地",
+      "title": "貸地／クスリのアオキ 鯏浦店 敷地外",
+      "meta": "物件情報 / 愛知県弥富市",
+      "badge": "物件",
+      "date": "2026-06-10",
+      "desc": "愛知県弥富市の貸地物件情報(デモ用要約)。"
+    }
+  ],
+  "news": [
+    {
+      "date": "2026.7.9",
+      "category": "コーポレート",
+      "title": "Webサイトサーバーメンテナンスのお知らせ",
+      "sourceUrl": "https://www.jmedj.co.jp/pages/corporate202660709"
+    },
+    {
+      "date": "2026.7.3",
+      "category": "書籍",
+      "title": "書籍回収・交換に関するお詫びとお知らせ",
+      "sourceUrl": "https://www.jmedj.co.jp/pages/corporate202660703"
+    },
+    {
+      "date": "2025.12.22",
+      "category": "jmedmook",
+      "title": "隔月刊誌「jmedmook」価格改定のお知らせ",
+      "sourceUrl": "https://www.jmedj.co.jp/pages/corporate20251222_2"
+    },
+    {
+      "date": "2025.09.25",
+      "category": "コーポレート",
+      "title": "新サイトでの初回ログインについて",
+      "sourceUrl": "https://www.jmedj.co.jp/pages/corporate20250925_2"
+    },
+    {
+      "date": "2025.09.25",
+      "category": "コーポレート",
+      "title": "サイトリニューアルのお知らせ",
+      "sourceUrl": "https://www.jmedj.co.jp/pages/corporate20250925"
+    }
+  ]
+}

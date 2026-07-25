@@ -94,11 +94,41 @@ def main() -> int:
         for key in ("contentType", "clinicalArea", "topic", "editorialFormat"):
             if not item.get(key):
                 errors.append(f"{item['id']}: missing taxonomy field {key}")
+    live_path = ROOT / "data" / "live-content.json"
+    if not live_path.exists():
+        errors.append("live-content.json: missing public metadata cache")
+    else:
+        live = json.loads(live_path.read_text(encoding="utf-8"))
+        for collection in ("books", "ebooks", "articles", "videos", "news"):
+            if not isinstance(live.get(collection), list) or not live[collection]:
+                errors.append(f"live-content.json: {collection} must not be empty")
+        for collection in ("books", "articles", "videos"):
+            for item in live.get(collection, []):
+                if not item.get("sourceUrl", "").startswith("https://www.jmedj.co.jp/"):
+                    errors.append(f"{item.get('id')}: sourceUrl must be an official HTTPS URL")
+                image = item.get("image", "")
+                if not image or not (ROOT / image).exists():
+                    errors.append(f"{item.get('id')}: cached image is missing")
+        for item in live.get("articles", []):
+            for key in ("contentType", "clinicalArea", "topic", "editorialFormat"):
+                if not item.get(key):
+                    errors.append(f"{item.get('id')}: missing live taxonomy field {key}")
+        for item in live.get("news", []):
+            if not item.get("date") or not item.get("title"):
+                errors.append("live-content.json: news requires date and title")
+            if not item.get("sourceUrl", "").startswith("https://www.jmedj.co.jp/"):
+                errors.append("live-content.json: news source must be official HTTPS")
     js_errors = []
     for path in sorted((ROOT / "assets" / "js").glob("*.js")):
         if not path.read_text(encoding="utf-8").strip():
             js_errors.append(f"{path.relative_to(ROOT)}: empty script")
     errors.extend(js_errors)
+    app_js = (ROOT / "assets" / "js" / "app.js").read_text(encoding="utf-8")
+    if 'fetch("https://www.jmedj.co.jp' in app_js:
+        errors.append("app.js: runtime access to the official site is forbidden")
+    css = (ROOT / "assets" / "css" / "style.css").read_text(encoding="utf-8").lower()
+    if "linear-gradient(" in css or "radial-gradient(" in css:
+        errors.append("style.css: gradients are outside the design system")
     if errors:
         print("QA FAILED")
         print("\n".join(errors))

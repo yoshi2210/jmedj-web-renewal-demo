@@ -68,26 +68,11 @@
 
   <div class="page-head">
     <h1>お知らせ</h1>
-    <p>現行サイトで <code>jmedj.myshopify.com</code> や手動連番スラッグに分散していたお知らせを、日付順の1箇所に集約(内容はデモ)。</p>
+    <p>公式サイトで公開中のお知らせを、日付・分類・見出しが比較できる1箇所に集約しています。</p>
   </div>
 
-  <div class="prose">
-    <details class="news-item" open>
-      <summary><time datetime="2026-07-15">2026.07.15</time><span class="news-tag">重要</span>書籍回収・交換に関するお詫びとお知らせ</summary>
-      <div class="news-body">(デモ)対象書籍の一部に誤りがあり、回収・交換を行います。詳細と対象ロットはこちらでご案内します。</div>
-    </details>
-    <details class="news-item">
-      <summary><time datetime="2026-06-30">2026.06.30</time><span class="news-tag">価格改定</span>隔月刊誌「jmedmook」価格改定のお知らせ</summary>
-      <div class="news-body">(デモ)制作費高騰に伴い、2026年8月号より価格を改定いたします。</div>
-    </details>
-    <details class="news-item">
-      <summary><time datetime="2026-05-20">2026.05.20</time><span class="news-tag">サイト</span>新サイトでの初回ログインについて</summary>
-      <div class="news-body">(デモ)リニューアルに伴い初回はパスワード再設定が必要です。<a href="faq.html">よくある質問</a>もご覧ください。</div>
-    </details>
-    <details class="news-item">
-      <summary><time datetime="2026-05-01">2026.05.01</time><span class="news-tag">サイト</span>サイトリニューアルのお知らせ</summary>
-      <div class="news-body">(デモ)検索・ナビゲーションを刷新しました。</div>
-    </details>
+  <div class="news-list news-archive" id="newsArchive" aria-live="polite">
+    <p class="meta">公開情報を読み込んでいます。</p>
   </div>
 </main>
 
@@ -121,12 +106,37 @@
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <p>日本医事新報社 サイト刷新提案デモ（非公式）／表示内容は検証用サンプルです。</p>
+    <p>日本医事新報社 サイト刷新提案デモ（非公式）／公開メタデータ・画像の権利は各権利者に帰属します。</p>
     <p>百年の編集知を、次の診療判断へ。</p>
   </div>
 </footer>
 <!-- @@/FOOTER@@ -->
 
 <script src="assets/js/app.js"></script>
+<script>
+  jmedjLoadContent(function (data) {
+    var root = document.getElementById("newsArchive");
+    root.innerHTML = "";
+    (data.news || []).forEach(function (item) {
+      var article = document.createElement("article");
+      var meta = document.createElement("p");
+      var date = document.createElement("time");
+      date.dateTime = item.date.replace(/\./g, "-");
+      date.textContent = item.date;
+      var category = document.createElement("span");
+      category.textContent = item.category || "お知らせ";
+      meta.appendChild(date);
+      meta.appendChild(category);
+      var link = document.createElement("a");
+      link.href = item.sourceUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = item.title + " ↗";
+      article.appendChild(meta);
+      article.appendChild(link);
+      root.appendChild(article);
+    });
+  });
+</script>
 </body>
 </html>
