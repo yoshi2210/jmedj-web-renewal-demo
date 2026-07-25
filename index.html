@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="home">
 
 <!-- @@HEADER@@ -->
 <a class="skip-link" href="#main">本文へスキップ</a>
 
 <div class="notice-bar">
-  <p>非公式リニューアル提案デモ(実サイトではありません)— <a href="https://github.com/yoshi2210/jmedj-web-renewal-demo/blob/master/docs/11_design_critique_and_v2_principles.md">設計批判とv2原則</a> / <a href="https://github.com/yoshi2210/jmedj-web-renewal-demo/blob/master/docs/08_design_philosophy_and_before_after.md">Before/After</a></p>
+  <p>非公式リニューアル提案デモ — 医療者の判断を支える情報設計を検証しています</p>
 </div>
 
 <header class="site-header">
@@ -25,264 +25,133 @@
       <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
     </button>
 
-    <a class="logo" href="index.html">
+    <a class="logo" href="index.html" aria-label="日本医事新報社 トップ">
       <span class="logo-mark">医</span>
-      <span class="logo-text">日本医事新報社<small>MEDICAL PARTNER — 刷新提案デモ</small></span>
+      <span class="logo-text">日本医事新報社<small>1921年創刊・刷新提案デモ</small></span>
     </a>
 
-    <nav class="zone-nav" aria-label="主要メニュー">
-      <div class="zone-nav-item">
-        <a class="zone-nav-btn" href="search-results.html" style="color: var(--primary-deep);">さがす</a>
-      </div>
-      <div class="zone-nav-item" data-zone="books">
-        <button class="zone-nav-btn" aria-expanded="false">出版物<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="mega-panel">
-          <h3>出版物ストア</h3>
-          <ul>
-            <li><a href="shop-books.html">出版物一覧(絞り込み)</a></li>
-            <li><a href="shop-books.html?sort=new">新刊・新着</a></li>
-            <li><a href="shop-books.html?format=%E9%9B%BB%E5%AD%90">電子コンテンツ</a></li>
-            <li><a href="news.html">正誤・改訂のお知らせ</a></li>
-            <li><a href="cart.html">カート</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="zone-nav-item" data-zone="articles">
-        <button class="zone-nav-btn" aria-expanded="false">Web医事新報<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="mega-panel">
-          <h3>記事を探す</h3>
-          <ul>
-            <li><a href="articles.html">記事一覧(診療科・連載で絞り込み)</a></li>
-            <li><a href="search-results.html?q=%E8%A8%BA%E7%99%82%E5%A0%B1%E9%85%AC">「診療報酬」で検索</a></li>
-            <li><a href="search-results.html?q=%E6%84%9F%E6%9F%93%E7%97%87">「感染症」で検索</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="zone-nav-item" data-zone="videos">
-        <button class="zone-nav-btn" aria-expanded="false">動画<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="mega-panel">
-          <h3>医事新報チャンネル</h3>
-          <ul>
-            <li><a href="videos.html">動画一覧</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="zone-nav-item" data-zone="career">
-        <button class="zone-nav-btn" aria-expanded="false">求人・物件<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="mega-panel">
-          <h3>ドクター求NAVI</h3>
-          <ul>
-            <li><a href="career.html">医師求人を探す</a></li>
-            <li><a href="career.html?tab=properties">医療物件を探す</a></li>
-            <li><a href="contact.html">広告掲載の相談</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="zone-nav-item" data-zone="company">
-        <button class="zone-nav-btn" aria-expanded="false">会社情報<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="mega-panel">
-          <h3>会社について</h3>
-          <ul>
-            <li><a href="company.html">会社概要・沿革</a></li>
-            <li><a href="news.html">お知らせ一覧</a></li>
-            <li><a href="faq.html">よくある質問</a></li>
-            <li><a href="contact.html">お問い合わせ</a></li>
-            <li><a href="sitemap.html">サイトマップ</a></li>
-          </ul>
-        </div>
-      </div>
+    <nav class="primary-nav" aria-label="主要メニュー">
+      <a href="articles.html">記事を読む</a>
+      <a href="shop-books.html">書籍・電子版を探す</a>
+      <a href="videos.html">動画で学ぶ</a>
+      <a href="career.html">求人・開業を探す</a>
     </nav>
 
     <div class="header-actions">
+      <a class="icon-btn header-search-link" href="search-results.html">検索</a>
       <a class="icon-btn" href="cart.html">カート</a>
       <a class="icon-btn primary" href="account.html">マイページ</a>
-    </div>
-  </div>
-
-  <div class="wrap search-row">
-    <div class="header-search" id="headerSearch">
-      <form class="search-form" action="search-results.html" method="get" role="search">
-        <input class="search-input" id="globalSearchInput" name="q" type="search"
-               placeholder="書籍・記事・動画・求人/物件をキーワードで検索"
-               aria-label="サイト内検索" autocomplete="off"
-               aria-expanded="false" aria-controls="suggestPanel">
-        <button class="search-submit" type="submit">検索</button>
-      </form>
-      <div class="suggest-panel" id="suggestPanel" role="listbox" aria-label="検索候補" hidden></div>
     </div>
   </div>
 </header>
 
 <div class="mobile-drawer" id="mobileDrawer" hidden>
   <div class="drawer-inner">
-    <details class="drawer-group" data-zone="books">
-      <summary>出版物ストア</summary>
-      <ul>
-        <li><a href="shop-books.html">出版物一覧</a></li>
-        <li><a href="shop-books.html?sort=new">新刊・新着</a></li>
-        <li><a href="shop-books.html?format=%E9%9B%BB%E5%AD%90">電子コンテンツ</a></li>
-        <li><a href="cart.html">カート</a></li>
-      </ul>
-    </details>
-    <details class="drawer-group" data-zone="articles">
-      <summary>Web医事新報(記事)</summary>
-      <ul>
-        <li><a href="articles.html">記事一覧</a></li>
-        <li><a href="search-results.html">サイト内検索</a></li>
-      </ul>
-    </details>
-    <details class="drawer-group" data-zone="videos">
-      <summary>動画</summary>
-      <ul><li><a href="videos.html">動画一覧</a></li></ul>
-    </details>
-    <details class="drawer-group" data-zone="career">
-      <summary>求人・物件</summary>
-      <ul>
-        <li><a href="career.html">医師求人</a></li>
-        <li><a href="career.html?tab=properties">医療物件</a></li>
-      </ul>
-    </details>
-    <details class="drawer-group" data-zone="company">
-      <summary>会社情報・サポート</summary>
-      <ul>
-        <li><a href="company.html">会社概要・沿革</a></li>
-        <li><a href="news.html">お知らせ</a></li>
-        <li><a href="faq.html">よくある質問</a></li>
-        <li><a href="contact.html">お問い合わせ</a></li>
-        <li><a href="sitemap.html">サイトマップ</a></li>
-      </ul>
-    </details>
-    <div class="drawer-direct">
-      <a href="account.html">マイページ / ログイン</a>
+    <nav class="drawer-nav" aria-label="モバイルメニュー">
+      <a href="search-results.html"><strong>サイト内検索</strong><span>病名・薬剤名・書名から探す</span></a>
+      <a href="articles.html"><strong>記事を読む</strong><span>診療領域・テーマ・記事形式から探す</span></a>
+      <a href="shop-books.html"><strong>書籍・電子版を探す</strong><span>媒体・診療領域から探す</span></a>
+      <a href="videos.html"><strong>動画で学ぶ</strong><span>解説・セミナーを見る</span></a>
+      <a href="career.html"><strong>求人・開業を探す</strong><span>求人と医療物件を分けて探す</span></a>
+    </nav>
+    <div class="drawer-utilities">
+      <a href="cart.html">カート</a>
+      <a href="account.html">マイページ</a>
+      <a href="faq.html">よくある質問</a>
+      <a href="contact.html">お問い合わせ</a>
     </div>
   </div>
 </div>
 <!-- @@/HEADER@@ -->
 
 <main id="main">
-
   <section class="hero">
     <div class="wrap">
-      <p class="hero-kicker">SINCE 1921 — EDITORIAL MODERNIZATION</p>
-      <h1>一世紀の編集知を、<em>診療の判断へ。</em><br>必要な情報を、迷わず。</h1>
-      <p class="hero-lead">診療・経営・キャリアの情報を、領域と公開日を手がかりに横断検索。忙しい医療者が次の行動を決めるための入口として再設計します。</p>
-      <div class="hero-search header-search">
+      <p class="hero-kicker">1921年創刊　医学と医療の現在を伝える</p>
+      <h1>百年の編集知を、<em>目の前の診療へ。</em></h1>
+      <p class="hero-lead">病名・薬剤名・診療領域から、記事、書籍、動画を横断して探せます。公開日と情報の種類を確かめながら、必要な情報へ進めます。</p>
+      <div class="hero-search">
         <form class="search-form" action="search-results.html" method="get" role="search">
-          <input class="search-input" name="q" type="search"
-                 placeholder="病名・薬剤・診療報酬・書名で検索(例: 糖尿病)"
-                 aria-label="サイト内検索">
-          <button class="search-submit" type="submit">検索</button>
+          <label class="visually-hidden" for="homeSearch">サイト内検索</label>
+          <input class="search-input" name="q" id="homeSearch" type="search"
+                 placeholder="病名・薬剤名・診療報酬・書名で検索" autocomplete="off">
+          <button class="search-submit" type="submit">検索する</button>
         </form>
       </div>
-      <div class="keyword-chips" id="heroChips" aria-label="人気の検索キーワード">
+      <div class="keyword-chips" id="heroChips" aria-label="よく検索されるキーワード">
         <a class="chip" href="search-results.html?q=%E7%B3%96%E5%B0%BF%E7%97%85">糖尿病</a>
         <a class="chip" href="search-results.html?q=%E8%A8%BA%E7%99%82%E5%A0%B1%E9%85%AC%E6%94%B9%E5%AE%9A">診療報酬改定</a>
         <a class="chip" href="search-results.html?q=%E6%84%9F%E6%9F%93%E7%97%87">感染症</a>
         <a class="chip" href="search-results.html?q=%E3%83%AA%E3%82%A6%E3%83%9E%E3%83%81">リウマチ</a>
         <a class="chip" href="search-results.html?q=%E5%91%BC%E5%90%B8%E5%99%A8">呼吸器</a>
       </div>
-      <aside class="clinical-note" aria-label="情報利用に関する案内">
-        <strong>情報を使う前に</strong>
-        <span>本番では公開日・執筆者・監修者・根拠の種別を各記事に明示します。緊急時や個別の診療判断には、最新の公的情報・診療ガイドラインもご確認ください。</span>
-      </aside>
-      <div class="zone-shortcuts">
-        <p class="zone-shortcuts-label">カテゴリから探す</p>
-        <a class="zone-shortcut" data-zone="books" href="shop-books.html">出版物<small>書籍・電子・雑誌</small></a>
-        <a class="zone-shortcut" data-zone="articles" href="articles.html">Web医事新報<small>診療科別の記事</small></a>
-        <a class="zone-shortcut" data-zone="videos" href="videos.html">動画<small>医事新報チャンネル</small></a>
-        <a class="zone-shortcut" data-zone="career" href="career.html">求人・物件<small>ドクター求NAVI</small></a>
+      <div class="trust-line" aria-label="掲載情報の確認項目">
+        <span>公開・刊行日</span><span>著者・監修者</span><span>記事・書籍・動画の種別</span>
       </div>
     </div>
   </section>
 
-  <section class="usecase-strip" aria-labelledby="usecase-title">
+  <section class="task-section" aria-labelledby="task-title">
     <div class="wrap">
-      <div class="usecase-strip-head">
-        <p class="eyebrow">DESIGNED FOR CLINICAL WORKFLOW</p>
-        <h2 id="usecase-title">探し始める理由から、入口を選べる</h2>
+      <div class="section-heading">
+        <p class="eyebrow">目的から選ぶ</p>
+        <h2 id="task-title">何をしたいですか</h2>
       </div>
-      <div class="usecase-grid">
-        <a href="articles.html" class="usecase-card" data-zone="articles"><span class="usecase-type">診療</span><strong>診療の疑問を整理する</strong><small>診療科・連載から記事を絞り込む</small><span aria-hidden="true">→</span></a>
-        <a href="shop-books.html" class="usecase-card" data-zone="books"><span class="usecase-type">学習</span><strong>体系的に学び直す</strong><small>書籍・電子コンテンツを比較する</small><span aria-hidden="true">→</span></a>
-        <a href="career.html" class="usecase-card" data-zone="career"><span class="usecase-type">キャリア</span><strong>働く場を検討する</strong><small>求人・医療物件を地域から探す</small><span aria-hidden="true">→</span></a>
+      <div class="task-grid">
+        <a href="articles.html" class="task-card"><span>診療に使う</span><strong>記事を読む</strong><small>診療領域・テーマ・記事形式で絞り込む</small></a>
+        <a href="shop-books.html" class="task-card"><span>体系的に学ぶ</span><strong>書籍・電子版を探す</strong><small>媒体と診療領域から比較する</small></a>
+        <a href="videos.html" class="task-card"><span>短時間で学ぶ</span><strong>動画・セミナーを見る</strong><small>解説、講演、セミナーから選ぶ</small></a>
+        <a href="career.html" class="task-card"><span>働き方を考える</span><strong>求人・開業情報を探す</strong><small>求人と医療物件を別々に探す</small></a>
       </div>
     </div>
   </section>
 
-  <section class="zone-section" data-zone="books">
+  <section class="zone-section latest-section">
     <div class="wrap">
       <div class="zone-section-head">
-        <h2><span class="zone-dot books"></span>出版物ストア</h2>
-        <a class="more-link" href="shop-books.html">もっと見る →</a>
+        <div>
+          <p class="eyebrow">記事・書籍・動画</p>
+          <h2>新着・注目</h2>
+        </div>
+        <a class="more-link" href="search-results.html">すべて検索する →</a>
       </div>
-      <div class="card-grid" id="grid-books"></div>
+      <div class="card-grid" id="grid-latest"></div>
     </div>
   </section>
 
-  <section class="zone-section" data-zone="articles">
+  <section class="career-bridge">
     <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot articles"></span>Web医事新報(記事)</h2>
-        <a class="more-link" href="articles.html">もっと見る →</a>
+      <div class="career-bridge-copy">
+        <p class="eyebrow">求人・開業は別の入口から</p>
+        <h2>臨床情報に混ぜず、条件から探す</h2>
+        <p>求人は診療科・地域・勤務形態、医療物件は地域・物件種別で絞り込みます。</p>
       </div>
-      <div class="card-grid" id="grid-articles"></div>
+      <a class="btn-secondary" href="career.html">求人・開業情報へ</a>
     </div>
   </section>
-
-  <section class="zone-section" data-zone="videos">
-    <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot videos"></span>医事新報チャンネル</h2>
-        <a class="more-link" href="videos.html">もっと見る →</a>
-      </div>
-      <div class="card-grid" id="grid-videos"></div>
-    </div>
-  </section>
-
-  <section class="zone-section" data-zone="career">
-    <div class="wrap">
-      <div class="zone-section-head">
-        <h2><span class="zone-dot career"></span>医師のための求人・物件</h2>
-        <a class="more-link" href="career.html">もっと見る →</a>
-      </div>
-      <div class="card-grid" id="grid-career"></div>
-    </div>
-  </section>
-
 </main>
 
 <!-- @@FOOTER@@ -->
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      <h4>探す</h4>
-      <ul>
-        <li><a href="search-results.html">サイト内検索</a></li>
-        <li><a href="shop-books.html">出版物一覧</a></li>
-        <li><a href="articles.html">記事一覧</a></li>
-        <li><a href="videos.html">動画一覧</a></li>
-        <li><a href="career.html">求人・物件</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>出版物</h4>
-      <ul>
-        <li><a href="shop-books.html?sort=new">新刊・新着</a></li>
-        <li><a href="shop-books.html?format=%E9%9B%BB%E5%AD%90">電子コンテンツ</a></li>
-        <li><a href="cart.html">カート</a></li>
-        <li><a href="account.html">購入履歴(マイページ)</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>サポート</h4>
+      <h4>ご利用案内</h4>
       <ul>
         <li><a href="faq.html">よくある質問</a></li>
-        <li><a href="contact.html">お問い合わせ</a></li>
-        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="news.html">お知らせ・正誤情報</a></li>
+        <li><a href="account.html">マイページ</a></li>
       </ul>
     </div>
     <div>
-      <h4>会社情報</h4>
+      <h4>お問い合わせ</h4>
+      <ul>
+        <li><a href="contact.html?type=product">商品・購読について</a></li>
+        <li><a href="contact.html?type=advertising">広告・転載について</a></li>
+        <li><a href="contact.html?type=bookseller">書店・取次について</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>企業・方針</h4>
       <ul>
         <li><a href="company.html">会社概要・沿革</a></li>
         <li><a href="company.html#privacy">プライバシーポリシー</a></li>
@@ -292,29 +161,18 @@
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <p>百年の紙面から、次の百年の検索へ。 — 日本医事新報社 サイト刷新提案デモ(非公式)。表示データはデモ用サンプルです。</p>
+    <p>日本医事新報社 サイト刷新提案デモ（非公式）／表示内容は検証用サンプルです。</p>
+    <p>百年の編集知を、次の診療判断へ。</p>
   </div>
 </footer>
-
-<nav class="bottom-nav" aria-label="モバイルナビゲーション">
-  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>ホーム</span></a>
-  <a href="shop-books.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v16H6a2 2 0 0 1-2-2zM13 4h7v16h-5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>出版物</span></a>
-  <a class="bn-search" href="search-results.html" aria-label="さがす(サイト内検索)">
-    <span class="bn-fab"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-    <span>さがす</span>
-  </a>
-  <a href="articles.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>記事</span></a>
-  <a href="account.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>マイページ</span></a>
-</nav>
 <!-- @@/FOOTER@@ -->
 
 <script src="assets/js/app.js"></script>
 <script>
   jmedjLoadContent(function (data) {
-    jmedjRenderGrid("grid-books", data.books.concat(data.ebooks), 4);
-    jmedjRenderGrid("grid-articles", data.articles, 4);
-    jmedjRenderGrid("grid-videos", data.videos, 4);
-    jmedjRenderGrid("grid-career", data.jobs.concat(data.properties), 4);
+    var latest = [].concat(data.articles, data.books, data.ebooks, data.videos)
+      .sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
+    jmedjRenderGrid("grid-latest", latest, 8);
   });
 </script>
 </body>

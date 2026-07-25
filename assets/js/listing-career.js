@@ -20,7 +20,6 @@
         input.type = "checkbox";
         input.className = "f-region";
         input.value = region;
-        input.checked = true;
         input.addEventListener("change", render);
         label.appendChild(input);
         label.appendChild(document.createTextNode(" " + region));
@@ -29,17 +28,19 @@
   }
 
   function syncTabs() {
-    document.querySelectorAll("#careerTabs .tab-btn").forEach(function (b) {
+    document.querySelectorAll("#careerTabs .scope-btn").forEach(function (b) {
       var active = b.getAttribute("data-type") === currentType;
       b.classList.toggle("active", active);
-      b.setAttribute("aria-selected", String(active));
+      b.setAttribute("aria-pressed", String(active));
     });
   }
 
   function render() {
     var items = data[currentType];
     var regions = activeRegions();
-    var filtered = items.filter(function (i) { return regions.indexOf(i.region) !== -1; });
+    var filtered = items.filter(function (i) {
+      return regions.length === 0 || regions.indexOf(i.region) !== -1;
+    });
 
     document.getElementById("listingCount").textContent =
       filtered.length + "件の" + (currentType === "jobs" ? "求人情報" : "物件情報");
@@ -52,7 +53,7 @@
   }
 
   document.getElementById("careerTabs").addEventListener("click", function (e) {
-    var btn = e.target.closest(".tab-btn");
+    var btn = e.target.closest(".scope-btn");
     if (!btn) return;
     currentType = btn.getAttribute("data-type");
     history.replaceState(null, "",
@@ -63,7 +64,7 @@
   });
 
   document.getElementById("resetFacets").addEventListener("click", function () {
-    document.querySelectorAll(".f-region").forEach(function (el) { el.checked = true; });
+    document.querySelectorAll(".f-region").forEach(function (el) { el.checked = false; });
     render();
   });
 

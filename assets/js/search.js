@@ -1,8 +1,7 @@
-/* 検索結果ページ v2 — ライブ検索・件数つきタブ・スケルトン・空状態
-   docs/11 原則1(検索ファースト)・原則5(状態デザイン)の実装 */
+/* 検索結果ページ v7 — コンテンツ検索と求人・開業検索を分離 */
 
 (function () {
-  var input = document.getElementById("globalSearchInput");
+  var input = document.getElementById("searchPageInput");
   var resultsEl = document.getElementById("resultsState");
   if (!resultsEl) return;
 
@@ -10,16 +9,16 @@
   var emptyEl = document.getElementById("emptyState");
   var countEl = document.getElementById("resultsCount");
   var titleEl = document.getElementById("resultsTitle");
-  var tabsEl = document.getElementById("tabs");
+  var scopesEl = document.getElementById("scopeFilters");
   var sortEl = document.getElementById("sortSelect");
 
   var POPULAR = ["糖尿病", "診療報酬改定", "感染症", "リウマチ", "呼吸器"];
-  var ZONES = ["all", "books", "articles", "videos", "career"];
+  var ZONES = ["content", "books", "articles", "videos", "career"];
 
   var allItems = null; /* null = 読み込み中 */
   var state = {
     query: new URLSearchParams(location.search).get("q") || "",
-    zone: "all",
+    zone: "content",
     sort: "relevance",
     force: null /* デモ用強制状態: "loading" | "empty" | null */
   };
@@ -34,7 +33,10 @@
   function score(item, lower) {
     var title = item.title.toLowerCase();
     if (title.indexOf(lower) !== -1) return 2;
-    var rest = ((item.category || "") + " " + (item.author || "") + " " + item.meta).toLowerCase();
+    var rest = [
+      item.category, item.clinicalArea, item.topic, item.editorialFormat,
+      item.series, item.author, item.meta, (item.tags || []).join(" ")
+    ].filter(Boolean).join(" ").toLowerCase();
     if (rest.indexOf(lower) !== -1) return 1;
     return 0;
   }
@@ -47,7 +49,8 @@
       })
       .filter(function (r) {
         if (r.s === 0) return false;
-        return zone === "all" || zoneOf(r.item) === zone;
+        if (zone === "content") return zoneOf(r.item) !== "career";
+        return zoneOf(r.item) === zone;
       })
       .sort(function (a, b) {
         if (state.sort === "new") return (b.item.date || "").localeCompare(a.item.date || "");
@@ -81,9 +84,9 @@
       return;
     }
 
-    /* タブ件数は常にライブ計算 */
+    /* 検索対象ごとの件数は常にライブ計算 */
     ZONES.forEach(function (z) {
-      var btn = tabsEl.querySelector('[data-zone="' + z + '"] .count');
+      var btn = scopesEl.querySelector('[data-zone="' + z + '"] .count');
       if (btn) btn.textContent = matches(z).length;
     });
 
@@ -131,15 +134,15 @@
     }
   }
 
-  tabsEl.addEventListener("click", function (e) {
-    var btn = e.target.closest(".tab-btn");
+  scopesEl.addEventListener("click", function (e) {
+    var btn = e.target.closest(".scope-btn");
     if (!btn) return;
-    tabsEl.querySelectorAll(".tab-btn").forEach(function (b) {
+    scopesEl.querySelectorAll(".scope-btn").forEach(function (b) {
       b.classList.remove("active");
-      b.setAttribute("aria-selected", "false");
+      b.setAttribute("aria-pressed", "false");
     });
     btn.classList.add("active");
-    btn.setAttribute("aria-selected", "true");
+    btn.setAttribute("aria-pressed", "true");
     state.zone = btn.getAttribute("data-zone");
     render();
   });

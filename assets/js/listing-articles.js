@@ -1,34 +1,57 @@
-/* 記事一覧 v2 — 連載区分・診療科ファセット */
+/* 記事一覧 v7 — 診療領域・テーマ・記事形式を独立した分類軸として扱う */
 (function () {
   var items = [];
 
-  function checked(cls) {
+  function selected(cls) {
     return Array.prototype.slice.call(document.querySelectorAll(cls + ":checked"))
       .map(function (el) { return el.value; });
   }
 
   function buildFacet(containerId, cls, values) {
     var el = document.getElementById(containerId);
-    values.forEach(function (v) {
+    values.forEach(function (value) {
       var label = document.createElement("label");
       label.className = "facet-option";
       var input = document.createElement("input");
       input.type = "checkbox";
       input.className = cls;
-      input.value = v;
-      input.checked = true;
+      input.value = value;
       input.addEventListener("change", render);
       label.appendChild(input);
-      label.appendChild(document.createTextNode(" " + v));
+      label.appendChild(document.createTextNode(" " + value));
       el.appendChild(label);
     });
   }
 
+  function matches(selectedValues, itemValue) {
+    return selectedValues.length === 0 || selectedValues.indexOf(itemValue) !== -1;
+  }
+
+  function renderSelectedFilters() {
+    var box = document.getElementById("activeFilters");
+    box.innerHTML = "";
+    document.querySelectorAll(".facet-panel input:checked").forEach(function (input) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "filter-chip";
+      button.textContent = input.value + " ×";
+      button.setAttribute("aria-label", input.value + "の絞り込みを解除");
+      button.addEventListener("click", function () {
+        input.checked = false;
+        render();
+      });
+      box.appendChild(button);
+    });
+  }
+
   function render() {
-    var series = checked(".f-series");
-    var cats = checked(".f-category");
-    var filtered = items.filter(function (i) {
-      return series.indexOf(i.series) !== -1 && cats.indexOf(i.category) !== -1;
+    var areas = selected(".f-clinical-area");
+    var topics = selected(".f-topic");
+    var formats = selected(".f-editorial-format");
+    var filtered = items.filter(function (item) {
+      return matches(areas, item.clinicalArea) &&
+        matches(topics, item.topic) &&
+        matches(formats, item.editorialFormat);
     });
 
     document.getElementById("listingCount").textContent = filtered.length + "件の記事";
@@ -38,19 +61,24 @@
     empty.style.display = filtered.length ? "none" : "block";
     grid.innerHTML = "";
     filtered.forEach(function (item) { grid.appendChild(jmedjCard(item)); });
+    renderSelectedFilters();
   }
 
   document.getElementById("resetFacets").addEventListener("click", function () {
-    document.querySelectorAll(".f-series, .f-category").forEach(function (el) { el.checked = true; });
+    document.querySelectorAll(".facet-panel input:checked").forEach(function (el) {
+      el.checked = false;
+    });
     render();
   });
 
   jmedjLoadContent(function (data) {
     items = data.articles;
-    buildFacet("seriesFacets", "f-series",
-      Array.from(new Set(items.map(function (i) { return i.series; }))).sort());
-    buildFacet("categoryFacets", "f-category",
-      Array.from(new Set(items.map(function (i) { return i.category; }))).sort());
+    buildFacet("clinicalAreaFacets", "f-clinical-area",
+      Array.from(new Set(items.map(function (item) { return item.clinicalArea; }))).sort());
+    buildFacet("topicFacets", "f-topic",
+      Array.from(new Set(items.map(function (item) { return item.topic; }))).sort());
+    buildFacet("editorialFormatFacets", "f-editorial-format",
+      Array.from(new Set(items.map(function (item) { return item.editorialFormat; }))).sort());
     render();
   });
 })();

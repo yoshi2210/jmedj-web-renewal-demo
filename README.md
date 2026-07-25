@@ -1,4 +1,4 @@
-# jmedj サイト刷新提案 — 公開デモ(v6)
+# jmedj サイト刷新提案 — 公開デモ(v7)
 
 日本医事新報社(https://www.jmedj.co.jp/)のUI/UX刷新提案の**公開デモ**。GitHub Pages 配信。
 
@@ -7,6 +7,14 @@
 - **設計批判と原則(改訂履歴)**: [docs/11_design_critique_and_v2_principles.md](docs/11_design_critique_and_v2_principles.md)
 - **医療従事者向けエンタープライズ品質の再評価(v5)**: [docs/13_enterprise_quality_reassessment.md](docs/13_enterprise_quality_reassessment.md)
 - **新報藍デザインシステム(v6)**: [docs/07_design_system.md](docs/07_design_system.md)
+- **行動ベースの情報設計と実装記録(v7)**: [docs/14_ia_v7_implementation_plan.md](docs/14_ia_v7_implementation_plan.md)
+
+## v7 の要点
+
+- **重複導線を整理**: ヘッダーを4つの行動に絞り、トップの検索フォームを1つに統合。固定モバイルボトムナビも廃止。
+- **分類を正規化**: 診療領域・テーマ・記事形式・コンテンツ種別を別軸化し、選択条件は解除可能なチップで表示。
+- **検索意図を分離**: 記事・書籍・動画と、求人・開業情報を別の検索スコープとして扱う。
+- **操作の意味を統一**: 偽タブを押下状態ボタンに変更し、タグ風の静的ラベルをクリック操作に使わない。
 
 ## v6 の要点
 
