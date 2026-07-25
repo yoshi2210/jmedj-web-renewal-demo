@@ -70,9 +70,9 @@ node --check app.js / article.js / listing-articles.js / listing-books.js
 
 ### 7. v5追加: 静的QAと実ブラウザ目視確認
 
-- `tools/qa_mock.py` を追加し、全16 HTMLページについて内部リンク／ローカルアセットの解決、`lang="ja"`、`title`、`main`ランドマークを検査するようにした。実行結果: **PASS**。
-- ローカルHTTPサーバー上でChromiumを用い、トップページをデスクトップ幅(1440px)とモバイル幅(390px)、検索結果をデスクトップ幅で目視確認した。v5で追加した利用目的導線、検索結果の情報原則、カードの公開／刊行日表示にレイアウト崩れはなかった。
-- JSは全ファイルで`node --check`を実行し、`git diff --check`も通過した。
+- `tools/qa_mock.py`で、全16 HTMLページの内部リンク／ローカルアセット、`lang="ja"`、`title`、`main`ランドマークを検査し、PASSした。
+- ローカルHTTPサーバー上でChromiumを用い、トップをデスクトップ幅(1440px)・モバイル幅(390px)、検索結果をデスクトップ幅で目視確認した。追加した利用目的導線、検索原則、公開／刊行日表示に崩れはなかった。
+- JS構文チェックと`git diff --check`も通過した。
 
 ## 未実施(正直な開示)
 
