@@ -1,5 +1,4 @@
-/* 検索結果ページ v7 — コンテンツ検索と求人・開業検索を分離 */
-
+/* 検索結果ページ v9 — 一致理由・診療領域・コンテンツ種別を分けて提示 */
 (function () {
   var input = document.getElementById("searchPageInput");
   var resultsEl = document.getElementById("resultsState");
@@ -11,16 +10,17 @@
   var titleEl = document.getElementById("resultsTitle");
   var scopesEl = document.getElementById("scopeFilters");
   var sortEl = document.getElementById("sortSelect");
-
+  var clinicalWrap = document.getElementById("clinicalFilter");
+  var clinicalEl = document.getElementById("clinicalAreaFilters");
   var POPULAR = ["糖尿病", "診療報酬改定", "感染症", "リウマチ", "呼吸器"];
   var ZONES = ["content", "books", "articles", "videos", "career"];
-
-  var allItems = null; /* null = 読み込み中 */
+  var allItems = null;
   var state = {
     query: new URLSearchParams(location.search).get("q") || "",
     zone: "content",
+    clinicalArea: "",
     sort: "relevance",
-    force: null /* デモ用強制状態: "loading" | "empty" | null */
+    force: null
   };
   if (input) input.value = state.query;
 
@@ -30,33 +30,37 @@
     return item.zone;
   }
 
-  function score(item, lower) {
-    var title = item.title.toLowerCase();
-    if (title.indexOf(lower) !== -1) return 2;
-    var rest = [
-      item.category, item.clinicalArea, item.topic, item.editorialFormat,
-      item.series, item.author, item.meta, (item.tags || []).join(" ")
-    ].filter(Boolean).join(" ").toLowerCase();
-    if (rest.indexOf(lower) !== -1) return 1;
-    return 0;
+  function rank(item, lower) {
+    if (!lower) return { score: 1, reason: "全件表示" };
+    var title = (item.title || "").toLowerCase();
+    if (title.indexOf(lower) !== -1) return { score: 4, reason: "タイトルに一致" };
+    var area = (item.clinicalArea || item.category || "").toLowerCase();
+    if (area.indexOf(lower) !== -1) return { score: 3, reason: "診療領域に一致" };
+    var topic = [item.topic, item.editorialFormat, item.series].filter(Boolean).join(" ").toLowerCase();
+    if (topic.indexOf(lower) !== -1) return { score: 2, reason: "テーマ・連載に一致" };
+    var rest = [item.author, item.meta, item.desc, (item.tags || []).join(" ")]
+      .filter(Boolean).join(" ").toLowerCase();
+    if (rest.indexOf(lower) !== -1) return { score: 1, reason: "著者・概要に一致" };
+    return { score: 0, reason: "" };
   }
 
-  function matches(zone) {
+  function ranked(zone, ignoreClinical) {
     var lower = state.query.trim().toLowerCase();
-    return allItems
-      .map(function (item) {
-        return { item: item, s: lower ? score(item, lower) : 1 };
-      })
-      .filter(function (r) {
-        if (r.s === 0) return false;
-        if (zone === "content") return zoneOf(r.item) !== "career";
-        return zoneOf(r.item) === zone;
-      })
-      .sort(function (a, b) {
-        if (state.sort === "new") return (b.item.date || "").localeCompare(a.item.date || "");
-        return b.s - a.s;
-      })
-      .map(function (r) { return r.item; });
+    return allItems.map(function (item) {
+      var result = rank(item, lower);
+      return { item: item, score: result.score, reason: result.reason };
+    }).filter(function (result) {
+      if (!result.score) return false;
+      if (zone === "content" && zoneOf(result.item) === "career") return false;
+      if (zone !== "content" && zoneOf(result.item) !== zone) return false;
+      return ignoreClinical || !state.clinicalArea ||
+        (result.item.clinicalArea || result.item.category) === state.clinicalArea;
+    }).sort(function (a, b) {
+      if (state.sort === "new") {
+        return (b.item.date || "").localeCompare(a.item.date || "");
+      }
+      return b.score - a.score || (b.item.date || "").localeCompare(a.item.date || "");
+    });
   }
 
   function show(which) {
@@ -66,17 +70,55 @@
   }
 
   function syncUrl() {
-    var qs = state.query ? "?q=" + encodeURIComponent(state.query) : "";
-    history.replaceState(null, "", "search-results.html" + qs);
+    var params = new URLSearchParams();
+    if (state.query) params.set("q", state.query);
+    var query = params.toString();
+    history.replaceState(null, "", "search-results.html" + (query ? "?" + query : ""));
+  }
+
+  function renderClinicalFacets() {
+    var options = ranked(state.zone, true)
+      .map(function (r) { return r.item.clinicalArea || r.item.category; })
+      .filter(Boolean);
+    options = Array.from(new Set(options)).sort();
+    clinicalEl.innerHTML = "";
+    clinicalWrap.hidden = state.zone === "career" || !options.length;
+    if (clinicalWrap.hidden) {
+      state.clinicalArea = "";
+      return;
+    }
+    var all = document.createElement("button");
+    all.type = "button";
+    all.className = "filter-chip" + (!state.clinicalArea ? " active" : "");
+    all.dataset.area = "";
+    all.textContent = "すべて";
+    clinicalEl.appendChild(all);
+    options.forEach(function (area) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "filter-chip" + (state.clinicalArea === area ? " active" : "");
+      button.dataset.area = area;
+      button.textContent = area;
+      clinicalEl.appendChild(button);
+    });
+  }
+
+  function resultCard(result) {
+    var card = jmedjCard(result.item);
+    card.classList.add("search-result");
+    var reason = document.createElement("span");
+    reason.className = "match-reason";
+    reason.textContent = result.reason;
+    var body = card.querySelector(".card-body");
+    var chip = body.querySelector(".card-chip");
+    chip.insertAdjacentElement("afterend", reason);
+    return card;
   }
 
   function render() {
-    titleEl.textContent = state.query
-      ? "「" + state.query + "」の検索結果"
-      : "サイト内検索";
-
+    titleEl.textContent = state.query ? "「" + state.query + "」の検索結果" : "横断検索";
     if (state.force === "loading" || allItems === null) {
-      jmedjRenderSkeleton(resultsEl, 8);
+      jmedjRenderSkeleton(resultsEl, 6);
       resultsEl.style.display = "grid";
       loadingEl.style.display = "block";
       emptyEl.style.display = "none";
@@ -84,13 +126,12 @@
       return;
     }
 
-    /* 検索対象ごとの件数は常にライブ計算 */
-    ZONES.forEach(function (z) {
-      var btn = scopesEl.querySelector('[data-zone="' + z + '"] .count');
-      if (btn) btn.textContent = matches(z).length;
+    ZONES.forEach(function (zone) {
+      var count = scopesEl.querySelector('[data-zone="' + zone + '"] .count');
+      if (count) count.textContent = ranked(zone, true).length;
     });
-
-    var filtered = state.force === "empty" ? [] : matches(state.zone);
+    renderClinicalFacets();
+    var filtered = state.force === "empty" ? [] : ranked(state.zone, false);
 
     if (!filtered.length) {
       show("empty");
@@ -106,44 +147,47 @@
       ? jmedjT("search.resultsFoundOne")
       : filtered.length + jmedjT("search.resultsFound");
     resultsEl.innerHTML = "";
-    filtered.forEach(function (item) {
-      resultsEl.appendChild(jmedjCard(item));
-    });
+    resultsEl.classList.add("grid-mixed");
+    filtered.forEach(function (result) { resultsEl.appendChild(resultCard(result)); });
   }
-
-  /* --- イベント --- */
 
   if (input) {
     var live = jmedjDebounce(function () {
       state.query = input.value.trim();
+      state.clinicalArea = "";
       state.force = null;
       syncUrl();
       render();
     }, 200);
     input.addEventListener("input", live);
-
-    var form = input.closest("form");
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault(); /* このページではライブ更新(遷移しない) */
-        state.query = input.value.trim();
-        state.force = null;
-        syncUrl();
-        render();
-      });
-    }
+    input.closest("form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      state.query = input.value.trim();
+      state.clinicalArea = "";
+      state.force = null;
+      syncUrl();
+      render();
+    });
   }
 
-  scopesEl.addEventListener("click", function (e) {
-    var btn = e.target.closest(".scope-btn");
-    if (!btn) return;
-    scopesEl.querySelectorAll(".scope-btn").forEach(function (b) {
-      b.classList.remove("active");
-      b.setAttribute("aria-pressed", "false");
+  scopesEl.addEventListener("click", function (event) {
+    var button = event.target.closest(".scope-btn");
+    if (!button) return;
+    scopesEl.querySelectorAll(".scope-btn").forEach(function (item) {
+      item.classList.remove("active");
+      item.setAttribute("aria-pressed", "false");
     });
-    btn.classList.add("active");
-    btn.setAttribute("aria-pressed", "true");
-    state.zone = btn.getAttribute("data-zone");
+    button.classList.add("active");
+    button.setAttribute("aria-pressed", "true");
+    state.zone = button.dataset.zone;
+    state.clinicalArea = "";
+    render();
+  });
+
+  clinicalEl.addEventListener("click", function (event) {
+    var button = event.target.closest("[data-area]");
+    if (!button) return;
+    state.clinicalArea = button.dataset.area;
     render();
   });
 
@@ -154,53 +198,62 @@
     });
   }
 
-  /* 空状態からの再検索チップ */
-  document.getElementById("emptyChips").addEventListener("click", function (e) {
-    var chip = e.target.closest(".chip");
+  document.getElementById("emptyChips").addEventListener("click", function (event) {
+    var chip = event.target.closest(".chip");
     if (!chip) return;
     state.query = chip.textContent;
+    state.clinicalArea = "";
     state.force = null;
     if (input) input.value = state.query;
     syncUrl();
     render();
   });
 
-  /* デモ用: 状態の強制切り替え(ステークホルダー向け標本) */
   var demoBar = document.querySelector(".demo-toolbar");
   if (demoBar) {
-    demoBar.addEventListener("click", function (e) {
-      var btn = e.target.closest("button[data-state]");
-      if (!btn) return;
-      demoBar.querySelectorAll("button").forEach(function (b) {
-        b.classList.remove("active");
-        b.setAttribute("aria-pressed", "false");
+    demoBar.addEventListener("click", function (event) {
+      var button = event.target.closest("button[data-state]");
+      if (!button) return;
+      demoBar.querySelectorAll("button").forEach(function (item) {
+        item.classList.remove("active");
+        item.setAttribute("aria-pressed", "false");
       });
-      btn.classList.add("active");
-      btn.setAttribute("aria-pressed", "true");
-      var s = btn.getAttribute("data-state");
-      state.force = s === "results" ? null : s;
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+      state.force = button.dataset.state === "results" ? null : button.dataset.state;
       render();
     });
   }
 
-  /* --- 初期化: i18n → データ(それまでスケルトン) --- */
-
   var chipsBox = document.getElementById("emptyChips");
-  POPULAR.forEach(function (kw) {
+  POPULAR.forEach(function (keyword) {
     var chip = document.createElement("button");
     chip.type = "button";
     chip.className = "chip";
-    chip.textContent = kw;
+    chip.textContent = keyword;
     chipsBox.appendChild(chip);
   });
 
-  render(); /* データ未着 → スケルトン表示 */
-
+  render();
   jmedjLoadI18n(function () {
     document.getElementById("loadingText").textContent = jmedjT("search.loading");
     jmedjLoadContent(function (data) {
-      allItems = jmedjAllItems(data);
-      render();
+      /* 少数の最新キャッシュだけでは検索語の標本が不足するため、
+         提案用カタログを追加する。ID重複は最新キャッシュを優先する。 */
+      fetch("data/sample-content.json")
+        .then(function (response) { return response.ok ? response.json() : null; })
+        .catch(function () { return null; })
+        .then(function (sample) {
+          var combined = jmedjAllItems(data);
+          var ids = new Set(combined.map(function (item) { return item.id; }));
+          if (sample) {
+            jmedjAllItems(sample).forEach(function (item) {
+              if (!ids.has(item.id)) combined.push(item);
+            });
+          }
+          allItems = combined;
+          render();
+        });
     });
   });
 })();

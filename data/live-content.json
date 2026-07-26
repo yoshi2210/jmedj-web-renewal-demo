@@ -1,6 +1,6 @@
 {
   "_note": "サイトオーナーの許可のもと、公開一覧のメタデータと少数のサムネイルを低頻度で取得した静的キャッシュです。本文・認証領域は取得していません。",
-  "generatedAt": "2026-07-25T13:18:01+00:00",
+  "generatedAt": "2026-07-26T08:56:41+00:00",
   "source": "https://www.jmedj.co.jp",
   "books": [
     {
@@ -91,90 +91,163 @@
   ],
   "ebooks": [
     {
-      "id": "e1",
+      "id": "live-product-apuf",
       "zone": "ebooks",
       "contentType": "電子版",
       "format": "電子",
-      "clinicalArea": "循環器内科",
-      "topic": "検査・診断",
-      "category": "循環器",
+      "clinicalArea": "全科共通",
+      "topic": "書籍",
+      "category": "書籍",
       "tags": [
-        "VExUS",
-        "超音波",
-        "静脈うっ血"
+        "mediaType_電子"
       ],
-      "title": "実践VExUS〈静脈うっ血を見抜き治療につなげる超音波評価〉",
-      "meta": "電子コンテンツ / 定価 2,970円(本体2,700円+税)",
+      "title": "どう考える？ 長引く発熱・不明熱の鑑別",
+      "meta": "電子版 / 定価 1,650円(税込)",
       "badge": "電子",
-      "price": 2970,
-      "date": "2026-05-01",
-      "author": "著 循環器内科医",
-      "desc": "超音波を用いた静脈うっ血評価(VExUS)の考え方と実践手順を解説(デモ用要約)。"
+      "price": 1650,
+      "date": "2026-07-24",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-apuf.png",
+      "sourceUrl": "https://www.jmedj.co.jp/products/apuf"
     },
     {
-      "id": "e2",
+      "id": "live-product-atcs",
       "zone": "ebooks",
       "contentType": "電子版",
       "format": "電子",
-      "clinicalArea": "腎臓内科",
-      "topic": "病態・治療",
-      "category": "循環器",
+      "clinicalArea": "全科共通",
+      "topic": "書籍",
+      "category": "書籍",
       "tags": [
-        "心腎連関",
-        "腎うっ血"
+        "mediaType_電子"
       ],
-      "title": "腎うっ血の正体に迫る",
-      "meta": "電子コンテンツ / 定価 1,980円(本体1,800円+税)",
+      "title": "JSH2025でどう変わる？ クリニックの降圧療法〈知らんぷり高血圧の克服をめざして〉",
+      "meta": "電子版 / 定価 1,760円(税込)",
+      "badge": "電子",
+      "price": 1760,
+      "date": "2026-07-17",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-atcs.png",
+      "sourceUrl": "https://www.jmedj.co.jp/products/atcs"
+    },
+    {
+      "id": "live-product-pscd",
+      "zone": "ebooks",
+      "contentType": "電子版",
+      "format": "電子",
+      "clinicalArea": "全科共通",
+      "topic": "書籍",
+      "category": "書籍",
+      "tags": [
+        "mediaType_電子"
+      ],
+      "title": "突然死を防ぐために！ 抗不整脈薬の薬物有害反応を理解する",
+      "meta": "電子版 / 定価 1,980円(税込)",
       "badge": "電子",
       "price": 1980,
-      "date": "2026-04-01",
-      "author": "著 腎臓内科医",
-      "desc": "心腎連関の観点から腎うっ血のメカニズムと評価法を整理(デモ用要約)。"
+      "date": "2026-07-10",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-pscd.png",
+      "sourceUrl": "https://www.jmedj.co.jp/products/pscd"
     },
     {
-      "id": "e3",
+      "id": "live-product-mild",
       "zone": "ebooks",
       "contentType": "電子版",
       "format": "電子",
-      "clinicalArea": "形成外科",
-      "topic": "基本手技",
-      "category": "外科",
+      "clinicalArea": "全科共通",
+      "topic": "書籍",
+      "category": "書籍",
       "tags": [
-        "切開",
-        "縫合",
-        "注射"
+        "mediaType_電子"
       ],
-      "title": "美容外科医になるための超基本手技〈切開，縫合，注射〉",
-      "meta": "電子コンテンツ / 定価 1,980円(本体1,800円+税)",
+      "title": "非専門医のための間質性肺炎 実践的アプローチ",
+      "meta": "電子版 / 定価 1,870円(税込)",
       "badge": "電子",
-      "price": 1980,
-      "date": "2026-03-01",
-      "author": "著 美容外科医",
-      "desc": "美容外科の基本手技を写真・図解で解説する入門コンテンツ(デモ用要約)。"
-    },
-    {
-      "id": "e4",
-      "zone": "ebooks",
-      "contentType": "電子版",
-      "format": "電子",
-      "clinicalArea": "検査医学",
-      "topic": "検査・診断",
-      "category": "検査",
-      "tags": [
-        "血液検査",
-        "Pearl",
-        "Pitfall"
-      ],
-      "title": "血液検査について考え直す〈再考から導き出されたPearl & Pitfall〉",
-      "meta": "電子コンテンツ / 定価 990円(本体900円+税)",
-      "badge": "電子",
-      "price": 990,
-      "date": "2026-02-01",
-      "author": "著 検査医学専門医",
-      "desc": "日常診療で見落としがちな血液検査解釈のポイントを整理(デモ用要約)。"
+      "price": 1870,
+      "date": "2026-07-03",
+      "author": "",
+      "desc": "日本医事新報社の公開商品情報です。内容・在庫・購入条件は公式ページでご確認ください。",
+      "image": "assets/images/live/product-mild.png",
+      "sourceUrl": "https://www.jmedj.co.jp/products/mild"
     }
   ],
   "articles": [
+    {
+      "id": "live-article-product_28922",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "全科共通",
+      "topic": "臨床・医療",
+      "editorialFormat": "エッセイ",
+      "category": "全科共通",
+      "series": "先生，ご存知ですか エッセイ",
+      "access": "公式サイト",
+      "tags": [
+        "エッセイ",
+        "全科共通"
+      ],
+      "title": "解剖実習で倒れないために［先生、ご存知ですか（101）］",
+      "meta": "エッセイ / 全科共通 / 一杉正仁",
+      "badge": "記事",
+      "date": "2026-07-26",
+      "updated": "2026-07-26",
+      "author": "一杉正仁",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28922.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28922"
+    },
+    {
+      "id": "live-article-product_28939",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "救命救急",
+      "topic": "臨床・医療",
+      "editorialFormat": "企画",
+      "category": "救命救急",
+      "series": "企画 救命救急",
+      "access": "公式サイト",
+      "tags": [
+        "企画",
+        "救命救急"
+      ],
+      "title": "熱中症で後遺症は残る？ 熱中症性脳症とは？ 治療法は？【熱中症の謎となぜ】",
+      "meta": "企画 / 救命救急 / 一二三 亨",
+      "badge": "記事",
+      "date": "2026-07-26",
+      "updated": "2026-07-26",
+      "author": "一二三 亨",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28939.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28939"
+    },
+    {
+      "id": "live-article-product_28911",
+      "zone": "articles",
+      "contentType": "記事",
+      "clinicalArea": "全科共通",
+      "topic": "臨床・医療",
+      "editorialFormat": "私の治療",
+      "category": "全科共通",
+      "series": "私の治療 皮膚科",
+      "access": "公式サイト",
+      "tags": [
+        "私の治療",
+        "全科共通"
+      ],
+      "title": "魚鱗癬（表皮分化疾患）［私の治療］",
+      "meta": "私の治療 / 全科共通 / 武市拓也",
+      "badge": "記事",
+      "date": "2026-07-26",
+      "updated": "2026-07-26",
+      "author": "武市拓也",
+      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
+      "image": "assets/images/live/article-product_28911.jpg",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28911"
+    },
     {
       "id": "live-article-product_28921",
       "zone": "articles",
@@ -198,78 +271,6 @@
       "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
       "image": "assets/images/live/article-product_28921.jpg",
       "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28921"
-    },
-    {
-      "id": "live-article-product_28938",
-      "zone": "articles",
-      "contentType": "記事",
-      "clinicalArea": "救命救急",
-      "topic": "臨床・医療",
-      "editorialFormat": "企画",
-      "category": "救命救急",
-      "series": "企画 救命救急",
-      "access": "公式サイト",
-      "tags": [
-        "企画",
-        "救命救急"
-      ],
-      "title": "熱疲労に注意！ 特徴は頭痛，嘔吐，倦怠感……熱中症で頭痛が起こるのはなぜ？【熱中症の謎となぜ】",
-      "meta": "企画 / 救命救急 / 一二三 亨",
-      "badge": "記事",
-      "date": "2026-07-25",
-      "updated": "2026-07-25",
-      "author": "一二三 亨",
-      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
-      "image": "assets/images/live/article-product_28938.jpg",
-      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28938"
-    },
-    {
-      "id": "live-article-product_28910",
-      "zone": "articles",
-      "contentType": "記事",
-      "clinicalArea": "脳神経外科",
-      "topic": "臨床・医療",
-      "editorialFormat": "私の治療",
-      "category": "脳神経外科",
-      "series": "私の治療 脳神経外科",
-      "access": "公式サイト",
-      "tags": [
-        "私の治療",
-        "脳神経外科"
-      ],
-      "title": "脳動脈瘤［私の治療］",
-      "meta": "私の治療 / 脳神経外科 / 吉村紳一",
-      "badge": "記事",
-      "date": "2026-07-25",
-      "updated": "2026-07-25",
-      "author": "吉村紳一",
-      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
-      "image": "assets/images/live/article-product_28910.jpg",
-      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28910"
-    },
-    {
-      "id": "live-article-product_28920",
-      "zone": "articles",
-      "contentType": "記事",
-      "clinicalArea": "感染症",
-      "topic": "臨床・医療",
-      "editorialFormat": "学術・連載",
-      "category": "感染症",
-      "series": "学術・連載 感染症",
-      "access": "公式サイト",
-      "tags": [
-        "学術・連載",
-        "感染症"
-      ],
-      "title": "英国で発生した美容医療関連のボツリヌス症のアウトブレイク［感染症今昔物語ー話題の感染症ピックアップー（49）］",
-      "meta": "学術・連載 / 感染症 / 石金正裕",
-      "badge": "記事",
-      "date": "2026-07-24",
-      "updated": "2026-07-24",
-      "author": "石金正裕",
-      "desc": "日本医事新報社の公開記事メタデータです。本文と公開条件は公式ページでご確認ください。",
-      "image": "assets/images/live/article-product_28920.jpg",
-      "sourceUrl": "https://www.jmedj.co.jp/blogs/product/product_28920"
     }
   ],
   "videos": [
@@ -364,61 +365,114 @@
   ],
   "jobs": [
     {
-      "id": "j1",
+      "id": "live-job-36142-b_qr",
       "zone": "jobs",
+      "contentType": "求人",
+      "region": "東京都",
+      "employment": "常勤・非常勤",
+      "clinicalArea": "全科共通",
+      "title": "医療法人社団 葵会 介護老人保健施設 葵の園・羽村",
+      "meta": "求人情報 / 東京都",
+      "badge": "求人",
+      "date": "",
+      "desc": "公開中の医師求人です。勤務条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-recruit/36142-b_qr"
+    },
+    {
+      "id": "live-job-36142_qr",
+      "zone": "jobs",
+      "contentType": "求人",
+      "region": "東京都",
+      "employment": "常勤・非常勤",
+      "clinicalArea": "全科共通",
+      "title": "医療法人社団 葵会 羽村透析クリニック",
+      "meta": "求人情報 / 東京都",
+      "badge": "求人",
+      "date": "",
+      "desc": "公開中の医師求人です。勤務条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-recruit/36142_qr"
+    },
+    {
+      "id": "live-job-recruit_30",
+      "zone": "jobs",
+      "contentType": "求人",
       "region": "京都府",
-      "employment": "常勤",
+      "employment": "常勤・非常勤",
+      "clinicalArea": "全科共通",
       "title": "一般財団法人 仁風会 嵯峨野病院",
-      "meta": "求人情報 / 京都府京都市",
+      "meta": "求人情報 / 京都府",
       "badge": "求人",
-      "date": "2026-07-01",
-      "desc": "京都市内の病院における常勤医師募集(デモ用要約)。"
+      "date": "",
+      "desc": "公開中の医師求人です。勤務条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-recruit/recruit_30"
     },
     {
-      "id": "j2",
+      "id": "live-job-recruit_1090",
       "zone": "jobs",
-      "region": "岩手県",
-      "employment": "常勤",
-      "title": "医療法人 三秋会 介護老人保健施設 さわなり苑",
-      "meta": "求人情報 / 岩手県西磐井郡平泉町",
+      "contentType": "求人",
+      "region": " 岩手県",
+      "employment": "常勤・非常勤",
+      "clinicalArea": "全科共通",
+      "title": "医療法人 三秋会 介護老人保健施設 やまゆり",
+      "meta": "求人情報 /  岩手県",
       "badge": "求人",
-      "date": "2026-06-15",
-      "desc": "介護老人保健施設における医師募集(デモ用要約)。"
-    },
-    {
-      "id": "j3",
-      "zone": "jobs",
-      "region": "全国",
-      "employment": "非常勤",
-      "title": "厚生労働省 検疫医療専門職",
-      "meta": "求人情報 / 全国主要海港・空港の検疫所",
-      "badge": "求人",
-      "date": "2026-05-20",
-      "desc": "全国の検疫所における医療専門職の募集(デモ用要約)。"
+      "date": "",
+      "desc": "公開中の医師求人です。勤務条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-recruit/recruit_1090"
     }
   ],
   "properties": [
     {
-      "id": "p1",
+      "id": "live-property-nc_00142",
       "zone": "properties",
+      "contentType": "物件",
       "region": "神奈川県",
       "usage": "医療ビル",
-      "title": "（仮称）元住吉メディカルセンター",
-      "meta": "物件情報 / 神奈川県川崎市",
+      "title": "【神奈川県】医療ビル／（仮称）元住吉メディカルセンター",
+      "meta": "物件情報 / 神奈川県",
       "badge": "物件",
-      "date": "2026-07-01",
-      "desc": "川崎市内で計画中の医療ビル物件情報(デモ用要約)。"
+      "date": "",
+      "desc": "公開中の医療物件です。賃料・入居条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-estate/nc_00142"
     },
     {
-      "id": "p2",
+      "id": "live-property-ka_00018",
       "zone": "properties",
-      "region": "愛知県",
-      "usage": "貸地",
-      "title": "貸地／クスリのアオキ 鯏浦店 敷地外",
-      "meta": "物件情報 / 愛知県弥富市",
+      "contentType": "物件",
+      "region": "【愛知県",
+      "usage": "【愛知県】貸地",
+      "title": "【愛知県】貸地／クスリのアオキ 鯏浦店 敷地外",
+      "meta": "物件情報 / 【愛知県",
       "badge": "物件",
-      "date": "2026-06-10",
-      "desc": "愛知県弥富市の貸地物件情報(デモ用要約)。"
+      "date": "",
+      "desc": "公開中の医療物件です。賃料・入居条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-estate/ka_00018"
+    },
+    {
+      "id": "live-property-ka_00017",
+      "zone": "properties",
+      "contentType": "物件",
+      "region": "【愛知県",
+      "usage": "【愛知県】貸地",
+      "title": "【愛知県】貸地／クスリのアオキ 武豊店",
+      "meta": "物件情報 / 【愛知県",
+      "badge": "物件",
+      "date": "",
+      "desc": "公開中の医療物件です。賃料・入居条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-estate/ka_00017"
+    },
+    {
+      "id": "live-property-ka_00015",
+      "zone": "properties",
+      "contentType": "物件",
+      "region": "【三重県",
+      "usage": "【三重県】貸地",
+      "title": "【三重県】貸地／クスリのアオキ 垂坂店",
+      "meta": "物件情報 / 【三重県",
+      "badge": "物件",
+      "date": "",
+      "desc": "公開中の医療物件です。賃料・入居条件・募集状況は公式ページでご確認ください。",
+      "sourceUrl": "https://www.jmedj.co.jp/blogs/dr9navi-estate/ka_00015"
     }
   ],
   "news": [

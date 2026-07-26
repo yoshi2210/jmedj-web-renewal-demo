@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>出版物ストア | 日本医事新報社(刷新モックv2)</title>
+<title>求人・医療物件詳細 | 日本医事新報社(刷新モックv9)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -64,49 +64,42 @@
 <!-- @@/HEADER@@ -->
 
 <main id="main" class="wrap">
-  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; 出版物ストア</p>
+  <p class="breadcrumb" id="breadcrumb"><a href="index.html">TOP</a> &gt; <a href="career.html">求人・開業</a></p>
 
-  <div class="page-head">
-    <h1>出版物ストア</h1>
-    <p>紙・電子版を、媒体と診療領域で絞り込めます。</p>
-  </div>
-
-  <div class="listing-layout">
-    <aside class="facet-panel" aria-label="絞り込み">
-      <div class="facet-group">
-        <h4>媒体</h4>
-        <label class="facet-option"><input type="checkbox" class="f-format" value="紙"> 紙の書籍</label>
-        <label class="facet-option"><input type="checkbox" class="f-format" value="電子"> 電子版</label>
-      </div>
-      <div class="facet-group">
-        <h4>診療領域</h4>
-        <div id="clinicalAreaFacets"></div>
-      </div>
-      <button class="facet-reset" id="resetFacets">絞り込みをクリア</button>
-    </aside>
-
-    <div>
-      <div class="listing-toolbar">
-        <span id="listingCount">読み込み中…</span>
-        <label>並べ替え:
-          <select id="sortSelect">
-            <option value="relevance">おすすめ順</option>
-            <option value="new">新着順</option>
-            <option value="price-asc">価格が安い順</option>
-            <option value="price-desc">価格が高い順</option>
-          </select>
-        </label>
-      </div>
-      <div class="active-filters" id="activeFilters" aria-live="polite"></div>
-      <div class="card-grid" id="listingGrid"></div>
-      <div id="listingEmpty" style="display:none;">
-        <div class="empty-state">
-          <h2>条件に一致する出版物が見つかりませんでした</h2>
-          <p>絞り込み条件を減らすか、「絞り込みをクリア」をお試しください。</p>
-        </div>
-      </div>
+  <article class="career-detail">
+    <div class="page-head">
+      <span class="card-chip" id="careerChip">求人・物件</span>
+      <h1 id="careerTitle">詳細を読み込んでいます</h1>
+      <p id="careerLead"></p>
     </div>
-  </div>
+
+    <div class="content-structure">
+      <section class="content-panel">
+        <h2 id="careerPointsTitle">検討ポイント</h2>
+        <ol class="key-points" id="careerKeyPoints"></ol>
+      </section>
+      <section class="content-panel">
+        <h2>基本情報</h2>
+        <dl class="facts-grid" id="careerFacts"></dl>
+      </section>
+    </div>
+
+    <div class="detail-actions">
+      <a class="btn-primary" href="contact.html?type=career">この情報について問い合わせる</a>
+      <button class="btn-secondary" type="button">検討リストに保存</button>
+      <span id="careerOfficial"></span>
+    </div>
+
+    <section class="content-panel" style="margin-bottom: var(--sp-5);">
+      <h2 id="careerDetailTitle">詳しい条件</h2>
+      <dl class="facts-grid" id="careerConditions"></dl>
+    </section>
+  </article>
+
+  <section class="cross-related">
+    <h2 class="related-heading" id="careerRelatedHeading">条件が近い情報</h2>
+    <div class="card-grid" id="relatedGrid"></div>
+  </section>
 </main>
 
 <!-- @@FOOTER@@ -->
@@ -146,6 +139,6 @@
 <!-- @@/FOOTER@@ -->
 
 <script src="assets/js/app.js"></script>
-<script src="assets/js/listing-books.js"></script>
+<script src="assets/js/career-detail.js"></script>
 </body>
 </html>
