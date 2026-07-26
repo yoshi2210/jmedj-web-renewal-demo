@@ -37,7 +37,7 @@
     </nav>
 
     <div class="header-actions">
-      <a class="icon-btn header-search-link" href="search-results.html">検索</a>
+      <a class="icon-btn header-search-link" href="search-results.html">横断検索</a>
       <a class="icon-btn" href="cart.html">カート</a>
       <a class="icon-btn primary" href="account.html">マイページ</a>
     </div>
@@ -47,7 +47,7 @@
 <div class="mobile-drawer" id="mobileDrawer" hidden>
   <div class="drawer-inner">
     <nav class="drawer-nav" aria-label="モバイルメニュー">
-      <a href="search-results.html"><strong>サイト内検索</strong><span>病名・薬剤名・書名から探す</span></a>
+      <a href="search-results.html"><strong>横断検索</strong><span>病名・薬剤名・診療科・書名から探す</span></a>
       <a href="articles.html"><strong>記事を読む</strong><span>診療領域・テーマ・記事形式から探す</span></a>
       <a href="shop-books.html"><strong>書籍・電子版を探す</strong><span>媒体・診療領域から探す</span></a>
       <a href="videos.html"><strong>動画で学ぶ</strong><span>解説・セミナーを見る</span></a>
@@ -67,12 +67,12 @@
   <p class="breadcrumb"><a href="index.html">TOP</a> &gt; 検索結果</p>
 
   <div class="results-head">
-    <h1 id="resultsTitle">サイト内検索</h1>
+    <h1 id="resultsTitle">横断検索</h1>
     <p class="results-count" id="resultsCount" aria-live="polite"></p>
   </div>
 
   <form class="search-form results-search" action="search-results.html" method="get" role="search">
-    <label class="visually-hidden" for="searchPageInput">サイト内検索</label>
+    <label class="visually-hidden" for="searchPageInput">記事・出版物・動画を横断検索</label>
     <input class="search-input" id="searchPageInput" name="q" type="search"
            placeholder="病名・薬剤名・診療報酬・書名で検索" autocomplete="off">
     <button class="search-submit" type="submit">検索する</button>
@@ -84,6 +84,11 @@
     <button class="scope-btn" type="button" aria-pressed="false" data-zone="books">書籍・電子版 <span class="count">–</span></button>
     <button class="scope-btn" type="button" aria-pressed="false" data-zone="videos">動画 <span class="count">–</span></button>
     <button class="scope-btn scope-btn-service" type="button" aria-pressed="false" data-zone="career">求人・開業 <span class="count">–</span></button>
+  </div>
+
+  <div class="clinical-filter" id="clinicalFilter" hidden>
+    <strong>診療領域で絞る</strong>
+    <div class="clinical-filter-options" id="clinicalAreaFilters"></div>
   </div>
 
   <div class="listing-toolbar">
@@ -101,7 +106,7 @@
       <p class="results-count" id="loadingText" aria-live="polite"></p>
     </div>
 
-    <div id="resultsState" class="card-grid" style="display:none;"></div>
+    <div id="resultsState" class="card-grid search-results-list" style="display:none;"></div>
 
     <div id="emptyState" style="display:none;">
       <div class="empty-state">
@@ -115,7 +120,7 @@
   <details class="proposal-note">
     <summary>この提案画面で確認する品質要件</summary>
     <div>
-      <p>検索中はスケルトンを表示し、0件時には次の検索語を提案します。各結果にはコンテンツの種別と公開・刊行日を表示し、検索結果に無関係な広告を挿入しません。</p>
+      <p>検索中はスケルトン、0件時は次の検索語を提案します。各結果には種別、公開・刊行日、診療領域と「なぜ一致したか」を表示します。最新の公開キャッシュに、検索状態を検証する少数の提案用カタログを補っています。</p>
       <div class="demo-toolbar" aria-label="状態デモ">
         <span>状態を確認:</span>
         <button type="button" data-state="loading" aria-pressed="false">読み込み中</button>
@@ -163,6 +168,6 @@
 <!-- @@/FOOTER@@ -->
 
 <script src="assets/js/app.js"></script>
-<script src="assets/js/search.js"></script>
+<script src="assets/js/search.js?v=9"></script>
 </body>
 </html>

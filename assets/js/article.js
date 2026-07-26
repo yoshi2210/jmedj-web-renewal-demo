@@ -1,4 +1,4 @@
-/* 記事詳細 v2 */
+/* 記事詳細 v9 — 要点、構造、信頼情報、次に読む内容を明示 */
 (function () {
   var id = new URLSearchParams(location.search).get("id") || "a1";
 
@@ -23,11 +23,32 @@
     }
 
     var meta = document.getElementById("articleMeta");
-    [item.author, item.date].filter(Boolean).forEach(function (t) {
+    [item.clinicalArea || item.category, item.editorialFormat, item.author, item.date]
+      .filter(Boolean).forEach(function (t) {
       var span = document.createElement("span");
       span.textContent = t;
       meta.appendChild(span);
     });
+
+    jmedjFillList("articleKeyPoints", [
+      (item.clinicalArea || item.category || "この領域") + "で見落としやすい判断点を整理",
+      "診察・検査・対応を、実際の順序で確認",
+      "公開日と著者、関連資料を同じ画面で追跡"
+    ]);
+    jmedjFillList("articleToc", [
+      "臨床上の問いと結論",
+      "診断・評価で確認するポイント",
+      "治療・説明時の注意点",
+      "参考文献と関連コンテンツ"
+    ]);
+    jmedjFillFacts("articleFacts", [
+      ["診療領域", item.clinicalArea || item.category],
+      ["記事形式", item.editorialFormat || item.series],
+      ["公開日", item.date ? item.date.replace(/-/g, "/") : ""],
+      ["著者", item.author || "公式ページで確認"],
+      ["更新方針", "改訂時は更新日を表示"],
+      ["出典", item.sourceUrl ? "公開記事メタデータ" : "提案用サンプル"]
+    ]);
 
     var breadcrumb = document.getElementById("breadcrumb");
     var catLink = document.createElement("a");
@@ -40,10 +61,9 @@
     document.getElementById("relatedHeading").textContent =
       "同じ診療科(" + item.category + ")の記事";
 
-    var related = all.filter(function (i) {
-      return i.category === item.category && i.id !== item.id;
-    });
+    var related = jmedjRelated(all, item, 4);
     var grid = document.getElementById("relatedGrid");
+    jmedjSetGridMode(grid, related);
     if (!related.length) {
       var p = document.createElement("p");
       p.className = "meta";
@@ -52,5 +72,8 @@
     } else {
       related.forEach(function (r) { grid.appendChild(jmedjCard(r)); });
     }
+
+    var cross = jmedjRelated(data.books.concat(data.ebooks, data.videos), item, 4);
+    jmedjRenderGrid("crossRelatedGrid", cross, 4);
   });
 })();

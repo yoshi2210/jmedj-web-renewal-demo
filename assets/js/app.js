@@ -76,6 +76,13 @@ function jmedjHrefFor(item) {
   if (item.zone === "books" || item.zone === "ebooks") return "product.html?id=" + item.id;
   if (item.zone === "articles") return "article.html?id=" + item.id;
   if (item.zone === "videos") return "video.html?id=" + item.id;
+  return "career-detail.html?id=" + item.id;
+}
+
+function jmedjChipHrefFor(item) {
+  if (item.zone === "books" || item.zone === "ebooks") return "shop-books.html";
+  if (item.zone === "articles") return "articles.html";
+  if (item.zone === "videos") return "videos.html";
   return "career.html" + (item.zone === "properties" ? "?tab=properties" : "");
 }
 
@@ -243,9 +250,67 @@ function jmedjRenderGrid(containerId, items, limit) {
   var el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = "";
-  items.slice(0, limit || items.length).forEach(function (item) {
+  var shown = items.slice(0, limit || items.length);
+  jmedjSetGridMode(el, shown);
+  shown.forEach(function (item) {
     el.appendChild(jmedjCard(item));
   });
+}
+
+function jmedjSetGridMode(el, items) {
+  if (!el) return;
+  el.classList.remove("grid-publications", "grid-compact", "grid-mixed");
+  var zones = Array.from(new Set((items || []).map(function (item) { return item.zone; })));
+  if (zones.length && zones.every(function (zone) { return zone === "books" || zone === "ebooks"; })) {
+    el.classList.add("grid-publications");
+  } else if (zones.length === 1) {
+    el.classList.add("grid-compact");
+  } else if (zones.length > 1) {
+    el.classList.add("grid-mixed");
+  }
+}
+
+function jmedjFillList(id, values) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = "";
+  values.forEach(function (value) {
+    var li = document.createElement("li");
+    li.textContent = value;
+    el.appendChild(li);
+  });
+}
+
+function jmedjFillFacts(id, pairs) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = "";
+  pairs.filter(function (pair) { return pair[1]; }).forEach(function (pair) {
+    var row = document.createElement("div");
+    var dt = document.createElement("dt");
+    var dd = document.createElement("dd");
+    dt.textContent = pair[0];
+    dd.textContent = pair[1];
+    row.appendChild(dt);
+    row.appendChild(dd);
+    el.appendChild(row);
+  });
+}
+
+function jmedjRelated(items, current, limit) {
+  return items.filter(function (item) { return item.id !== current.id; })
+    .map(function (item) {
+      var score = 0;
+      if (item.clinicalArea && item.clinicalArea === current.clinicalArea) score += 3;
+      if (item.topic && item.topic === current.topic) score += 2;
+      if (item.category && item.category === current.category) score += 1;
+      return { item: item, score: score };
+    })
+    .sort(function (a, b) {
+      return b.score - a.score || (b.item.date || "").localeCompare(a.item.date || "");
+    })
+    .slice(0, limit || 4)
+    .map(function (result) { return result.item; });
 }
 
 function jmedjRenderSkeleton(container, count) {
@@ -314,5 +379,42 @@ function jmedjRenderSkeleton(container, count) {
     var first = items[0], last = items[items.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+})();
+
+/* 現在地は色だけでなく aria-current でも伝える。詳細ページは親ゾーンを選択する。 */
+(function () {
+  var file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  var parent = {
+    "article.html": "articles.html",
+    "product.html": "shop-books.html",
+    "video.html": "videos.html",
+    "career-detail.html": "career.html"
+  }[file] || file;
+  document.querySelectorAll(".primary-nav a, .drawer-nav a").forEach(function (link) {
+    var href = (link.getAttribute("href") || "").split("?")[0].toLowerCase();
+    if (href === parent) link.setAttribute("aria-current", "page");
+  });
+})();
+
+/* モバイルでは一覧を先に見せ、必要な時だけ絞り込みを展開する。 */
+(function () {
+  document.querySelectorAll(".listing-layout > .facet-panel").forEach(function (panel, index) {
+    var id = panel.id || "facetPanel" + index;
+    panel.id = id;
+    panel.classList.add("mobile-collapsed");
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "mobile-facet-toggle";
+    button.setAttribute("aria-controls", id);
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = "条件で絞り込む";
+    button.addEventListener("click", function () {
+      var expanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!expanded));
+      button.textContent = expanded ? "条件で絞り込む" : "絞り込みを閉じる";
+      panel.classList.toggle("mobile-collapsed", expanded);
+    });
+    panel.insertAdjacentElement("beforebegin", button);
   });
 })();

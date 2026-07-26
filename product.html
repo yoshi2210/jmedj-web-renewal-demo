@@ -37,7 +37,7 @@
     </nav>
 
     <div class="header-actions">
-      <a class="icon-btn header-search-link" href="search-results.html">検索</a>
+      <a class="icon-btn header-search-link" href="search-results.html">横断検索</a>
       <a class="icon-btn" href="cart.html">カート</a>
       <a class="icon-btn primary" href="account.html">マイページ</a>
     </div>
@@ -47,7 +47,7 @@
 <div class="mobile-drawer" id="mobileDrawer" hidden>
   <div class="drawer-inner">
     <nav class="drawer-nav" aria-label="モバイルメニュー">
-      <a href="search-results.html"><strong>サイト内検索</strong><span>病名・薬剤名・書名から探す</span></a>
+      <a href="search-results.html"><strong>横断検索</strong><span>病名・薬剤名・診療科・書名から探す</span></a>
       <a href="articles.html"><strong>記事を読む</strong><span>診療領域・テーマ・記事形式から探す</span></a>
       <a href="shop-books.html"><strong>書籍・電子版を探す</strong><span>媒体・診療領域から探す</span></a>
       <a href="videos.html"><strong>動画で学ぶ</strong><span>解説・セミナーを見る</span></a>
@@ -68,8 +68,32 @@
 
   <div class="detail-layout" id="detailRoot"></div>
 
-  <section>
-    <h2 class="related-heading">関連する出版物</h2>
+  <section class="content-structure" aria-label="出版物の内容">
+    <div class="content-panel">
+      <h2>この出版物で分かること</h2>
+      <ol class="key-points" id="productKeyPoints"></ol>
+    </div>
+    <div class="content-panel">
+      <h2>目次・収録内容</h2>
+      <ol id="productToc"></ol>
+    </div>
+    <div class="content-panel">
+      <h2>書誌情報</h2>
+      <dl class="facts-grid" id="productFacts"></dl>
+    </div>
+    <div class="content-panel">
+      <h2>購入前に確認</h2>
+      <p>サンプル、対応端末、在庫・発送条件は公式商品ページで確認できます。紙版と電子版がある場合は同じ内容としてまとめて比較します。</p>
+    </div>
+  </section>
+
+  <section class="cross-related">
+    <h2 class="related-heading">このテーマを記事・動画で深める</h2>
+    <div class="card-grid" id="crossRelatedGrid"></div>
+  </section>
+
+  <section class="cross-related">
+    <h2 class="related-heading">同じ診療領域の出版物</h2>
     <div class="card-grid" id="relatedGrid"></div>
   </section>
 </main>

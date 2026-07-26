@@ -13,6 +13,8 @@
 
 理由: 対象は実在の第三者企業(日本医事新報社)の本番稼働サイトであり、チャット上の申告のみでは侵入的なセキュリティテストの正式な許可範囲を確認できないため。脆弱性診断相当の作業が必要な場合は、[05_security_and_compliance_scope.md](05_security_and_compliance_scope.md) に記載の正式なエンゲージメント手順を踏むことを推奨する。この境界は監査結果の信頼性を毀損しないための前提条件であり、以降のドキュメントもすべてこの前提の上に成り立っている。
 
+> **2026-07-26追補:** PC・モバイルの実ブラウザ表示、現在の4入口ナビ、横断検索、書籍・電子版・記事・動画・求人・物件の一覧/詳細まで再調査した。現在の観測、検索中心の提案骨子、KPIと売上仮説は[16_comprehensive_current_site_audit_and_growth_case.md](16_comprehensive_current_site_audit_and_growth_case.md)を優先して参照する。
+
 ## 主な調査結果(詳細は [01_current_site_audit.md](01_current_site_audit.md))
 
 1. **検索UIの多言語対応漏れ**: Algolia検索ウィジェットの文言("No results for" "Add to cart" "results found" 等)が英語のまま実装されており、日本語サイトなのに検索結果0件時や並べ替えUIで英語が表示される。
@@ -24,8 +26,10 @@
 
 ## 提案の方向性
 
-- 4事業を「出版物」「記事(Web医事新報)」「動画」「医師のための求人・物件」の4つの明確なゾーンに分け、メガメニュー形式でグルーピングする([02_information_architecture.md](02_information_architecture.md))。
+- 現在も使われている4つの直接入口を維持し、「出版物」「記事(Web医事新報)」「動画」「医師のための求人・物件」の役割を明確にする。階層を増やすメガメニューは採用しない。
 - 検索は日本語UIで完全ローカライズし、SSR側は「空ループの繰り返し」ではなく「結果0件時の意味のあるプレースホルダー」を返す設計に変更する([05相当のUX仕様は04_ux_ui_redesign_rationale.md] 参照)。
+- モバイルは書籍・電子版を2列、記事・動画・求人・物件を横型行にし、一画面4〜5件を比較できる密度を目安にする。
+- 一致理由、診療領域、更新日、著者を検索結果に出し、詳細から同じ診療領域の別形式へ接続する。
 - URL体系を事業ゾーン単位で正規化する(移行マッピング表は02のセクション3)。
 - モックサイト(`/mock`)で上記を実装したプロトタイプを提供する。
 
@@ -38,4 +42,5 @@
 | `docs/03_enterprise_website_build_process.md` | エンタープライズWebサイト構築の標準ステップ |
 | `docs/04_ux_ui_redesign_rationale.md` | 再設計の意思決定根拠 |
 | `docs/05_security_and_compliance_scope.md` | 調査範囲の境界と正式セキュリティレビューへの導線 |
+| `docs/16_comprehensive_current_site_audit_and_growth_case.md` | 本番再調査、検索中心の提案骨子、KPI、売上仮説 |
 | `mock/` | 再設計後のUI/UXを示す静的モックサイト |

@@ -60,6 +60,7 @@
     grid.style.display = filtered.length ? "grid" : "none";
     empty.style.display = filtered.length ? "none" : "block";
     grid.innerHTML = "";
+    jmedjSetGridMode(grid, filtered);
     filtered.forEach(function (item) { grid.appendChild(jmedjCard(item)); });
     renderSelectedFilters();
   }

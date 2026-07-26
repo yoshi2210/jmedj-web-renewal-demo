@@ -1,4 +1,4 @@
-/* 商品詳細 v2 */
+/* 商品詳細 v9 — 購買情報、内容評価、他形式への回遊を一画面でつなぐ */
 (function () {
   var id = new URLSearchParams(location.search).get("id") || "b1";
 
@@ -44,7 +44,7 @@
 
       var price = document.createElement("div");
       price.className = "detail-price";
-      price.textContent = "¥" + item.price.toLocaleString();
+      price.textContent = typeof item.price === "number" ? "¥" + item.price.toLocaleString() : "価格は公式ページで確認";
       var small = document.createElement("small");
       small.textContent = "(税込)";
       price.appendChild(small);
@@ -73,16 +73,35 @@
 
       root.appendChild(body);
 
+      jmedjFillList("productKeyPoints", [
+        (item.clinicalArea || "臨床") + "領域の要点を、診療場面から逆引きできます",
+        "判断の根拠と実践手順を、章単位で確認できます",
+        "関連する記事・動画へ進み、刊行後の更新情報も追えます"
+      ]);
+      jmedjFillList("productToc", [
+        "第1章　よく遭遇する症候・所見の整理",
+        "第2章　鑑別と検査を組み立てる",
+        "第3章　治療・フォローアップの実際",
+        "付録　診療で使えるチェックリスト"
+      ]);
+      jmedjFillFacts("productFacts", [
+        ["媒体", item.format || item.contentType],
+        ["診療領域", item.clinicalArea || item.category],
+        ["刊行日", item.date ? item.date.replace(/-/g, "/") : ""],
+        ["著者・編集", item.author || "公式ページで確認"],
+        ["商品区分", item.contentType || item.category],
+        ["データ出典", item.sourceUrl ? "公開商品情報" : "提案用サンプル"]
+      ]);
+
       var breadcrumb = document.getElementById("breadcrumb");
       var current = document.createElement("span");
       current.textContent = item.title;
       breadcrumb.appendChild(document.createTextNode(" > "));
       breadcrumb.appendChild(current);
 
-      var related = all.filter(function (i) {
-        return i.category === item.category && i.id !== item.id;
-      }).slice(0, 4);
+      var related = jmedjRelated(all, item, 4);
       var grid = document.getElementById("relatedGrid");
+      jmedjSetGridMode(grid, related);
       if (!related.length) {
         var p = document.createElement("p");
         p.className = "meta";
@@ -91,6 +110,9 @@
       } else {
         related.forEach(function (r) { grid.appendChild(jmedjCard(r)); });
       }
+
+      var cross = jmedjRelated(data.articles.concat(data.videos), item, 4);
+      jmedjRenderGrid("crossRelatedGrid", cross, 4);
     });
   });
 })();

@@ -1,33 +1,37 @@
-/* 動画一覧 v2 — テーマファセット(v1で欠落していたゾーンの一覧を補完) */
+/* 動画一覧 v9 — 診療領域とテーマを混ぜず、未選択を「すべて」とする */
 (function () {
   var items = [];
 
-  function checked() {
-    return Array.prototype.slice.call(document.querySelectorAll(".f-category:checked"))
+  function checked(selector) {
+    return Array.prototype.slice.call(document.querySelectorAll(selector + ":checked"))
       .map(function (el) { return el.value; });
   }
 
-  function buildFacets() {
-    var el = document.getElementById("categoryFacets");
-    Array.from(new Set(items.map(function (i) { return i.category; }))).sort()
-      .forEach(function (cat) {
+  function buildFacet(containerId, className, values) {
+    var el = document.getElementById(containerId);
+    el.innerHTML = "";
+    Array.from(new Set(values.filter(Boolean))).sort()
+      .forEach(function (value) {
         var label = document.createElement("label");
         label.className = "facet-option";
         var input = document.createElement("input");
         input.type = "checkbox";
-        input.className = "f-category";
-        input.value = cat;
-        input.checked = true;
+        input.className = className;
+        input.value = value;
         input.addEventListener("change", render);
         label.appendChild(input);
-        label.appendChild(document.createTextNode(" " + cat));
+        label.appendChild(document.createTextNode(" " + value));
         el.appendChild(label);
       });
   }
 
   function render() {
-    var cats = checked();
-    var filtered = items.filter(function (i) { return cats.indexOf(i.category) !== -1; });
+    var areas = checked(".f-video-area");
+    var topics = checked(".f-video-topic");
+    var filtered = items.filter(function (i) {
+      return (!areas.length || areas.indexOf(i.clinicalArea || i.category) !== -1) &&
+        (!topics.length || topics.indexOf(i.topic || i.category) !== -1);
+    });
 
     document.getElementById("listingCount").textContent = filtered.length + "件の動画";
     var grid = document.getElementById("listingGrid");
@@ -35,17 +39,23 @@
     grid.style.display = filtered.length ? "grid" : "none";
     empty.style.display = filtered.length ? "none" : "block";
     grid.innerHTML = "";
+    jmedjSetGridMode(grid, filtered);
     filtered.forEach(function (item) { grid.appendChild(jmedjCard(item)); });
   }
 
   document.getElementById("resetFacets").addEventListener("click", function () {
-    document.querySelectorAll(".f-category").forEach(function (el) { el.checked = true; });
+    document.querySelectorAll(".f-video-area, .f-video-topic").forEach(function (el) {
+      el.checked = false;
+    });
     render();
   });
 
   jmedjLoadContent(function (data) {
     items = data.videos;
-    buildFacets();
+    buildFacet("clinicalAreaFacets", "f-video-area",
+      items.map(function (i) { return i.clinicalArea || i.category; }));
+    buildFacet("topicFacets", "f-video-topic",
+      items.map(function (i) { return i.topic || i.category; }));
     render();
   });
 })();

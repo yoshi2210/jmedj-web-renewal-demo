@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import json
-import re
-import sys
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -73,7 +71,7 @@ def audit_file(path: Path) -> list[str]:
         errors.append(f"{path.name}: duplicate fixed bottom navigation remains")
     if path.name == "index.html" and parser.search_forms != 1:
         errors.append(f"{path.name}: expected exactly one search form")
-    if path.name in {"articles.html", "shop-books.html", "career.html"} and parser.checked_checkboxes:
+    if path.name in {"articles.html", "shop-books.html", "career.html", "videos.html"} and parser.checked_checkboxes:
         errors.append(f"{path.name}: facets must not be preselected")
     for value in parser.links:
         if value == "#":
@@ -94,21 +92,23 @@ def main() -> int:
         for key in ("contentType", "clinicalArea", "topic", "editorialFormat"):
             if not item.get(key):
                 errors.append(f"{item['id']}: missing taxonomy field {key}")
+
     live_path = ROOT / "data" / "live-content.json"
     if not live_path.exists():
         errors.append("live-content.json: missing public metadata cache")
     else:
         live = json.loads(live_path.read_text(encoding="utf-8"))
-        for collection in ("books", "ebooks", "articles", "videos", "news"):
+        for collection in ("books", "ebooks", "articles", "videos", "jobs", "properties", "news"):
             if not isinstance(live.get(collection), list) or not live[collection]:
                 errors.append(f"live-content.json: {collection} must not be empty")
-        for collection in ("books", "articles", "videos"):
+        for collection in ("books", "ebooks", "articles", "videos", "jobs", "properties"):
             for item in live.get(collection, []):
                 if not item.get("sourceUrl", "").startswith("https://www.jmedj.co.jp/"):
                     errors.append(f"{item.get('id')}: sourceUrl must be an official HTTPS URL")
-                image = item.get("image", "")
-                if not image or not (ROOT / image).exists():
-                    errors.append(f"{item.get('id')}: cached image is missing")
+                if collection not in {"jobs", "properties"}:
+                    image = item.get("image", "")
+                    if not image or not (ROOT / image).exists():
+                        errors.append(f"{item.get('id')}: cached image is missing")
         for item in live.get("articles", []):
             for key in ("contentType", "clinicalArea", "topic", "editorialFormat"):
                 if not item.get(key):
@@ -118,11 +118,10 @@ def main() -> int:
                 errors.append("live-content.json: news requires date and title")
             if not item.get("sourceUrl", "").startswith("https://www.jmedj.co.jp/"):
                 errors.append("live-content.json: news source must be official HTTPS")
-    js_errors = []
+
     for path in sorted((ROOT / "assets" / "js").glob("*.js")):
         if not path.read_text(encoding="utf-8").strip():
-            js_errors.append(f"{path.relative_to(ROOT)}: empty script")
-    errors.extend(js_errors)
+            errors.append(f"{path.relative_to(ROOT)}: empty script")
     app_js = (ROOT / "assets" / "js" / "app.js").read_text(encoding="utf-8")
     if 'fetch("https://www.jmedj.co.jp' in app_js:
         errors.append("app.js: runtime access to the official site is forbidden")
